@@ -1,0 +1,6 @@
+Cracking the Coding Interview - Youtube Playlist
+
+Watched : 
+1 - Algorithm Questions
+5 - Hash tables
+7 - Big O Notation 

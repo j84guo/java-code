@@ -1,0 +1,34 @@
+import java.util.*;
+
+public class StackQuestions {
+	
+	static class MinStack {
+
+		Stack<Integer> data;
+		Stack<Integer> min;
+
+		MinStack() {
+			data = new Stack<Integer>();
+			min = new Stack<Integer>();
+		}
+
+		void push(int value) {
+			data.push(value);
+			if(value <= min.peek()) min.push(value); 
+		}
+
+		int pop() {
+			int value = data.pop();
+			if(value.peek() == min.peek()) min.pop();
+			return value;
+		}
+
+		int min() {
+			return min.peek();
+		}
+	}
+
+	public static void main(String[] args) {
+
+	}
+}
