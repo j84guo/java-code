@@ -1,0 +1,17 @@
+Mockito mocks dependencies to facilitate testing enviornment requirements. For example, it allows you to mock API calls, database access and other 
+dependencies.
+
+@InjectMocks : identifies a class which will be created and injected with mocked objects
+@Mock : identifies a class which will be created and mocked
+@RunWith(MockitoJUnitRunner.class) : this is a JUnit annotation, which indicates that a test class should be initialized by Mockito before running the tests  
+
+The following static methods can be used to execute tests with a mock object.
+
+when(object.method(/*some args*/)).thenReturn(/*some result*/);
+-> Mocks an objects method and hardcodes a result.
+
+verify(object).method(/*some args*/);
+-> Verifies that a mocked object has its method called with the specified parameters
+
+verify(object, times(/*an integer*/)).method(/*some args*/);
+-> Verifies that a mocked object has its method called a certain number of times 

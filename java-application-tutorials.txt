@@ -13,6 +13,8 @@ https://www.lynda.com/Spring-Framework-tutorials/Spring-Framework-Depth/606088-2
 
 // java programming
 https://www.lynda.com/Java-tutorials/Java-Advanced-Training/107061-2.html
+// java data structures
+https://www.lynda.com/Java-tutorials/Java-Data-Structures/534633-2.html
 // java 8
 https://www.lynda.com/Java-tutorials/Java-Essential-Training/377484-2.html?srchtrk=index%3a27%0alinktypeid%3a2%0aq%3aservlet%0apage%3a1%0as%3arelevance%0asa%3atrue%0aproducttypeid%3a2
 // tomcat
