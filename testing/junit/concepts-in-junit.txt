@@ -1,0 +1,10 @@
+fixtures - pre-conditions for running tests, use setUp() and tearDown()
+suite - a collection of test classes, use @RunWith and @Suite
+runner - class which executes test cases 
+test class - class with a collection of test cases 
+test - method in a test class which performs a unit test 
+
+Assert - class contain usefule assert* methods to check conditions
+
+@Before, @After - identifies methods that should be executed before/after each test method
+@BeforeClass, @AfterClass - methods to be executed once before and once after running class tests
