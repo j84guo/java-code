@@ -1,0 +1,31 @@
+/*****************************
+Concepts in Spring Framework :
+*****************************/
+
+Introduction :
+Spring is an opinionated framework for developing enterprise java applications. Spring comprises many modules, the core module providing basic features like 
+dependency injection. Also popular are Spring MVC, Spring Data, Spring Cloud, etc.
+
+Dependency Injection :
+DI is a specific form of Inversion of Control, whereby one object is injected into another object by the framework, as opposed to having the second object
+instantiate the first. DI can be setter based or constructor based.
+
+Aspect Oriented Programming :
+Cross-cutting concerns are those which affect many parts of the application, like logging, security, caching, etc. Spring's AOP module provides method
+interceptors and pointcuts to decouple cross-cutting functionality from business logic.
+
+Architecture :
+Core -> Beans, Core, Context
+Data access -> JDBC, ORM, JMS
+Web -> Web-Socket, Web-MVC, Web
+Misc -> AOP, Test, Messaging
+
+IoC Container : 
+Spring's core container creates objects, wires them together and manages their lifecycle from creation to destruction. It is an implementation of the factory
+pattern. The container knows how to wire POJO's into an executable application based on xml or annotation configuration. 
+
+Beans : 
+A bean is any object created and managed by Spring, based on configuration data. The default scope of a bean in singleton, which allows one stateless bean per 
+container. Alternatively, prototype creates a new stateful instance per class which wants it and request creates a bean per HTTP request. A bean can have 
+setup and tear down methods defined in its configuration to be called at the start and end of the bean's lifecycle.
+
