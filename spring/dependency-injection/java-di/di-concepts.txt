@@ -1,0 +1,13 @@
+There are some problems with the legacy email application :
+
+1. EmailApplication has a hardcoded dependency, it is responsible for initializing the EmailService and using it. Switching to a different email service in the
+   future would require changes in the EmailApplication class. The difficulty extends in the case of multiple classes using the EmailService.
+2. Testing is difficult because the application directly creates the service, we can't mock the dependency.
+   
+One way to decouple dependencies is to pass it in the constructor. However this puts the initialization burden on the client now.
+
+The better way to implement dependency inject is : 
+
+1. Service component's should be desinged with a base class or an interface.
+2. Consumer classes should be written in terms of the service interface.
+3. Injector classes will initialize the services and consumers.
