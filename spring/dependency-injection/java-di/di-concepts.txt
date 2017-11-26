@@ -11,3 +11,7 @@ The better way to implement dependency inject is :
 1. Service component's should be desinged with a base class or an interface.
 2. Consumer classes should be written in terms of the service interface.
 3. Injector classes will initialize the services and consumers.
+
+Notice in the modern example that consumers are no longer responsible for instantiating their dependencies. Rather an injector class
+returns a created service. In our application code therefore, we created an injector, get the service and inject it into the consumer.
+This way changes can be made to the service without re-writing the consumer 
