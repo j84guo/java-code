@@ -35,6 +35,11 @@ Annotation Details :
 -> @Autowired indicates that Spring chould satify an object's dependency through a field or method. Using @Autowired(required=false) tells spring not to
    throw an exception if it can't find the right bean, which it normally does. Note that @Inject (Java DI Specification) can also be used.  
 
--> @ContextConfiguration(classes=ConfigClass.class) is used in tests and the main class to identify config class to start bean wiring.
+-> @ContextConfiguration(classes=ConfigClass.class) is used in test classes to identify config class to start bean wiring.
+
+Loading Application Context :
+Traditionally, Spring uses an ApplicationContext object in the main method to load the application context.
+E.g. ApplicationContext context = new ClassPathXMLApplicationContext("path");
+     SomeObject obj = (SomeObject) context.getBean("beanName"); // alternatively use the java application context and pass the configuration classes
 
 } 
