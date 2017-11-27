@@ -2,9 +2,13 @@
 Concepts in Spring Framework :
 *****************************/
 
+Features :
+Dependency injection, AOP, templates (e.g. JDBC).
+
 Introduction :
 Spring is an opinionated framework for developing enterprise java applications. Spring comprises many modules, the core module providing basic features like 
-dependency injection. Also popular are Spring MVC, Spring Data, Spring Cloud, etc.
+dependency injection. Also popular are MVC, JDBC, AOP modules. There are many external projects which build on Spring Framework, e.g. Spring Cloud, 
+Spring Data, etc. 
 
 Dependency Injection :
 DI is a specific form of Inversion of Control, whereby one object is injected into another object by the framework, as opposed to having the second object
@@ -12,7 +16,8 @@ instantiate the first. DI can be setter based or constructor based.
 
 Aspect Oriented Programming :
 Cross-cutting concerns are those which affect many parts of the application, like logging, security, caching, etc. Spring's AOP module provides method
-interceptors and pointcuts to decouple cross-cutting functionality from business logic.
+interceptors and pointcuts to decouple cross-cutting functionality from business logic. An aspect can be thought of as a blanket covering all the 
+business modules of an application. 
 
 Architecture :
 Core -> Beans, Core, Context
@@ -22,10 +27,31 @@ Misc -> AOP, Test, Messaging
 
 IoC Container : 
 Spring's core container creates objects, wires them together and manages their lifecycle from creation to destruction. It is an implementation of the factory
-pattern. The container knows how to wire POJO's into an executable application based on xml or annotation configuration. 
+pattern. The container knows how to wire POJO's into an executable application based on xml or annotation configuration. There are serveral implementations of
+the IoC container, grouped into BeanFactory or ApplicationContext types. 
+
+BeanFactory and Application Context :
+1. BeanFactory provides basic DI functionality.
+2. ApplicationContext continas BeanFactory and other abilities. It loads bean definitions, creates them and wires them together. There are serveral 
+   implementations of the application context. E.g. ClassPathXmlApplicationContext loads beans from xml, AnnotayionConfigApplicationContext loads beans 
+   from Java configuration classes (injector classes), etc. 
 
 Beans : 
 A bean is any object created and managed by Spring, based on configuration data. The default scope of a bean in singleton, which allows one stateless bean per 
 container. Alternatively, prototype creates a new stateful instance per class which wants it and request creates a bean per HTTP request. A bean can have 
 setup and tear down methods defined in its configuration to be called at the start and end of the bean's lifecycle.
+
+Bean Lifecycle :
+Traditionally, new and garbage collection delimit a POJO's lifespan. In Spring, beans have a more elaborate life cycle :
+-> Instatiate, Populate properties, BeanNameAware's setBeanName(), BeanFactoryAware's setBeanFactory(), ApplicationContextAware's setApplicationContext(),
+   Pre-initialization BeanPostProcessors, InitializingBean's adterPropertiesSet(), Call custom init-method, Post-initialization BeanPostProcessors,
+  *** BEAN IS NOT READY TO USE ***, Container is shutdown, DisposableBean's destroy(), Call custom destroy-method.  
+
+/****
+Xml :
+****/
+XML tags and attributes may have different meanings when used by different people. Therefore xml namespaces are a way to indicate which vocabulary you are using.
+the xmlns attribute is a commonly used attribute associated with a unique identifier, a URL. The xmlns attribute acts as a root namspace and is then used to 
+identify a namespace prefix, which has its own namespace URL. We use the prefix before xml elements to identify the meaning of those tags and the data they 
+enclose.
 
