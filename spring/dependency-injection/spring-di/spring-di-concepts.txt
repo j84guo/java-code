@@ -1,0 +1,40 @@
+The Spring container (BeanFactory or more commonly ApplicationContext) is reponsible for creating beans and injecting them into other objects (wiring). The
+wiring specification can be declared in three main ways : explicit xml, explicit java and automatic configuration (implicit bean discovery and automatic
+injection).
+
+1. Explicit XML configuration
+
+2. Explicit Java configuration
+
+3. Implicit bean discovery and autowiring (Automatic configuration) { 
+
+Autowiring is achieved in two phases :
+
+Component scanning 
+---> Spring discovers beans to be created in the application context
+Autowiring 
+---> Spring automatically injects dependencies
+
+Creating discoverable beans :
+-> Turn on component scanning EXPLICITLY in one of the following ways 
+	-Use a Java config class annotated with @Configuration and @ComponentScan (by default scans the same package as the config class)
+	-Use an XML config file with the tag <context:component-scan base-package="myPackage"/>
+-> Use @Component on the bean's class 
+
+Injecting beans :
+-> annotate a field or method with @Autowired
+
+Annotation Details :
+-> All beans in the application context have a default ID, which can be overridden using @Component("myCustomBeanName") or a normal @Component and 
+   @Named("myCustomByName").
+
+-> @ComponentScan defaults to the current package when scanning. To explicitly set one or more packages, use @ComponentScan("pacakge1") or 
+   @ComponentScan(basePackages={"package1", "package2", "package3"}) or @ComponentScan(basePackageClasses={classInP1.class, classInp2.class})
+   Note the last convention is type safe, i.e. safe after refactoring the package names.
+
+-> @Autowired indicates that Spring chould satify an object's dependency through a field or method. Using @Autowired(required=false) tells spring not to
+   throw an exception if it can't find the right bean, which it normally does. Note that @Inject (Java DI Specification) can also be used.  
+
+-> @ContextConfiguration(classes=ConfigClass.class) is used in tests and the main class to identify config class to start bean wiring.
+
+} 
