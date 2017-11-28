@@ -1,3 +1,5 @@
+// lombok, jackson xmk/json, generics, reflection api
+// <insert link>
 // spark java
 http://sparkjava.com/documentation#getting-started
 // spring boot introduction
