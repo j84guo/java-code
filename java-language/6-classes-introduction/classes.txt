@@ -57,3 +57,34 @@ super() calls the parent constructor
 
 Garbage collection :
 The Java runtime detects when an object is not needed anymore and releases its memory.
+
+Class Scope :
+Classes can have different scopes.
+public - visible globally
+package private - visible within the package 
+
+Member Access levels :
+Members of a class can have different access levels.
+private - only visible from within the class
+public - visible globally
+protected - visible within the package and to child classes outside the package
+package private - visible within the package only
+
+Nested classes :
+Nested classes can be static or non static.
+
+Static (static nested class) - Basically behaves as a top level class which is nested within a larger class for organization and reading purposes. The 
+nested class and its parent can only access each other via an object reference, however the nested class can access static parent members without going
+through the class name first. instantiate a (visible) nested class with ClassName.NestedClassName object = new ClassName.NestedClassName();
+
+Non-static (inner class) - a class which can access instance and static members of the parent directly, even those that are private. Note that the parent 
+cannot access the inner class members without an instance though. Inner classes are used to facilitate operations in the larger class when access to the 
+specific parent instance is needed.
+
+Also see : local class (inner class in a block)
+
+Anonymous Inner Class :
+One-time use nameless class which implements an interface. The declaration and instantiation are combined into one expression. 
+InterfaceName object = new InterfaceName(){
+	// implement the interface
+};
