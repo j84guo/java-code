@@ -1,0 +1,59 @@
+Introduction :
+Classes define a logical relationship between data and operations, they are the building block of object oriented programming.
+
+// general class
+class ClassName {
+	ClassName(){
+		// constructor
+	}
+
+	static type static-var1
+	... 
+
+	type instance-var1
+	...
+
+	static type static-method1(...){
+		// static method body
+	}
+	...
+
+	type instance-method1(...){
+		// instance method body
+	}
+	...
+}
+
+
+Obtaining an instance of a class :
+// declares a reference variable of type ClassName
+// uses the new operator to allocate memory for an instance of ClassName named objectName
+ClassName objectName = new ClassName();
+
+
+Assigning reference variables :
+// both references point to the same object
+Box b1 = new Box();
+Box b2 = b1;
+
+
+Methods :
+// general method
+type name(parameter-list) {
+	// body of method
+}
+
+
+Constructors : 
+Initialize classes and can take parameters like methods, except constructor's have no name.
+
+this :
+The this keyword refers to the current object.
+this() calls the current object's constructor
+
+super :
+In a subclass, super refers to the parent
+super() calls the parent constructor
+
+Garbage collection :
+The Java runtime detects when an object is not needed anymore and releases its memory.
