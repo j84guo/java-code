@@ -1,6 +1,0 @@
-(TCP, UDP, HTTP, SSL)
-1. Multi-threaded C server
-2. Java network client 
-
-(Machine Learning)
-3. In-memory caching algorithm based on most popular queries.
