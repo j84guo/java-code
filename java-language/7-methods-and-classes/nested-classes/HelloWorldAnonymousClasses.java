@@ -1,5 +1,5 @@
 public class HelloWorldAnonymousClasses {
-	
+
     interface HelloWorld {
         public void greet();
         public void greetSomeone(String someone);
@@ -11,7 +11,7 @@ public class HelloWorldAnonymousClasses {
 	frenchGreeting and spanishGreeting, but uses a local class for englishGreeting
 	*/
     public void sayHello() {
-        
+
 		//local class
         class EnglishGreeting implements HelloWorld {
             String name = "world";

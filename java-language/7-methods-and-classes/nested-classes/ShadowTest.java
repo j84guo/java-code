@@ -4,7 +4,7 @@ public class ShadowTest {
 	//outer class field
     public int x = 0;
 
-	//innter class
+	//inner class
     class FirstLevel {
 
 		//inner class field

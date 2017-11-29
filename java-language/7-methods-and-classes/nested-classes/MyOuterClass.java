@@ -5,7 +5,7 @@ public class MyOuterClass {
 	
 	//private static method
 	private static String getStr(){
-		return "this is a static method beloning to the outer class";
+		return "this is a private static method beloning to the outer class";
 	}
 	
 	//static nested class 
