@@ -1,0 +1,27 @@
+Java's primitive types can be wrapped in another class :
+
+Character
+Boolean
+Byte
+Short
+Interger
+Long
+Float
+Double 
+
+Character :
+use characterObject.charValue() to get the primitive wrapped inside
+
+Boolean :
+booleanValue()
+
+Numeric Type Wrappers : 
+byte byteValue( )
+double doubleValue( )
+float floatValue( )
+int intValue( )
+long longValue( )
+short shortValue( )
+
+Autoboxing :
+The automatic conversion between primitive and object facilitates algorithms and the collections library.
