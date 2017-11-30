@@ -1,5 +1,7 @@
+// package
 package soundsystem;
 
+// junit assert
 import static org.junit.Assert.*;
 
 import org.junit.Rule;
@@ -10,8 +12,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+// @RunWith indicates the test should be processed by Spring (to inject beans)
 @RunWith(SpringJUnit4ClassRunner.class)
+
+// @ContextConfiguration indicates the source of configuration data for the test
 @ContextConfiguration(classes=CDPlayerConfig.class)
+
 public class CDPlayerTest {
 
   @Rule
