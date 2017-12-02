@@ -1,7 +1,7 @@
 /*************************
 Spring Theory (1 week) :
 *************************/
--dependency injection (0.5 days)
+-java dependency injection (0.5 days)
 -automatic/java/xml configuration (1.5 days)
 -spring data (0.5 days)
 -jdbc (0.5 days)
