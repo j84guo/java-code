@@ -1,0 +1,72 @@
+https://www.tutorialspoint.com/jdbc/index.htm
+
+/*****
+JDBC :
+*****/
+
+Introduction :
+
+Java Database Connectivity is a specification providing interfaces for implementation independent connectivity to data sources. Interfaces are available to handle common tasks such as :
+-creating a connection 
+-executing SQL queries
+-accessing results
+
+
+1. Architecture : 
+
+JDBC uses database specific drivers, managed by a driver manager, to provide tansparent connectivity. The driver manager is exposed to application code via the JDBC API while the database
+specific drivers connect to the manager with the JDBC Driver API.
+
+
+2. Components : 
+
+DriverManager - class which manages a list of database drivers
+Driver - the manager interacts with specific database servers using its driver class 
+Connection - interface with connectivity methods
+Statement - interface representing a SQL query
+ResultSet - iterator for reading query results
+SQLException - database operation error	
+
+
+3. Packages :
+
+java.sql
+java.x.sql
+
+
+4. MySQL Review :
+
+CREATE DATABASE DB_NAME;
+DROP DATABASE DB_NAME;
+CREATE TABLE table_name
+(
+   column_name column_data_type,
+   column_name column_data_type,
+   column_name column_data_type
+   ...
+);
+INSERT INTO table_name VALUES (column1, column2, ...);
+SQL> SELECT column_name, column_name, ...
+     FROM table_name
+     WHERE conditions;
+UPDATE table_name
+     SET column_name = value, column_name = value, ...
+     WHERE conditions;
+DELETE FROM table_name WHERE conditions;
+
+
+5. Creating a JDBC application :
+
+-import packages 
+-register driver 
+-open connection
+-execute query
+-extract result data
+-clean up resources
+
+
+6. Drivers
+
+JDK ships with java.sql package, which defines interfaces fpr jdbc use. Third parties implement the java.sql.Driver interface for their specific database and provide drivers packaged
+as .jar files for developers to use. Often drivers are implemnted in pure java, using operating system sockets (local process or network sockets?) to communicate with the database server, e.g.
+MySQL's driver.
