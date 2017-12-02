@@ -1,6 +1,10 @@
 (TCP, UDP, HTTP, SSL)
 1. Multi-threaded C server
 2. Java network client 
+3. Kotlin package manager
+4. Scala and Spark
+5. Go messenge
 
 (Machine Learning)
-3. In-memory caching algorithm based on most popular queries.
+Picture recognition
+In-memory caching algorithm based on most popular queries.
