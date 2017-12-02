@@ -1,0 +1,74 @@
+/************
+Annotations :
+************/
+
+Supplemental information in a source file. These may be used by various tools, or even form the basis of an application framework (Spring).
+
+An annotation is created through a mechanism based on the interface.
+
+// A simple annotation type.
+@interface MyAnno {
+ String str();
+ int val();
+}
+
+-@interface indicates to the compiler that an annotation type is being created
+-all annotations are solely declarations of methods, see str() and val()
+-these methods are not implemented by you, but by Java, and act much like fields
+-any type of declaration can have an annotation : field, method, constructor
+
+// Annotate a method.
+@MyAnno(str = "Annotation Example", val = 100)
+public static void myMeth() { // ...
+
+Retention Policy : 
+Determines at what point an annotation is discarded.
+
+SOURCE - stored in source, discarded at compilation
+CLASS -  stored in calss, discarded at runtime
+RUNTIME - persists through compilation and runtime
+
+@Retention(RetentionPolicy.RUNTIME)
+@interface MyAnno {
+ String str();
+ int val();
+}
+
+/***********
+Reflection :
+***********/
+
+Runtime annotations can be discovered by another Java program through reflection. This is the feature that enables information about a class to be obtained
+at runtime. 
+
+1. obtain a Class object that represents the annotated class, e.g. call Object.getClass()
+2. with the Class object, you call getMethod()/getField()/getConstructor() 
+3. with the method/field object you can find its annotations with getAnnotation(Class<A> annoType) // annoType is a Class object of the relevant annotation
+
+/*********
+Built in :
+*********/
+
+Java defines some standard annotations :
+
+@Override - method must override parent implementation
+@FunctionalInterface - indicates that an interface contains only one abstract method to be used by a lambda expression (for readability only)
+@SuppressWarnings - compiler warnings should be ignored (specified as strings) 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

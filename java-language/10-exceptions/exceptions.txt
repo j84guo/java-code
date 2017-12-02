@@ -1,0 +1,71 @@
+/*
+
+Exceptions are runtime errors. The general form is : 
+
+try {
+ // block of code to monitor for errors
+ }
+ catch (ExceptionType1 exOb) {
+ // exception handler for ExceptionType1
+ }
+ catch (ExceptionType2 exOb) {
+ // exception handler for ExceptionType2
+ }
+ // ...
+ finally {
+ // block of code to be executed after try block ends
+}
+ 
+Exception objects are children of Throwable
+Underneath Throwable are two branches : 
+
+1. Exception (errors the user program should catch) RuntimeException is an important 
+subclass of Exception describing automaticaly defined errors like division by zero, array indexing.  
+2. Error (exceptions which are not expected to be caught by the program normally, e.g. hard disk failure, stack overflow)
+These errors are used by the JVM. 
+ 
+*/
+
+We will deal with the Exception class :
+
+1. Uncaught 
+Exceptions must be caught. In the event that no user defined catch exists, the default JVM catcher handles the exception
+terminates the program and prints some error messages.
+
+2. Caught
+Try-Catch lets you handle exceptions gracefully.
+
+throws :
+For all exceptions except Error and RuntimeException methods that may throw exceptions should use throws in their signature 
+(checked vs unchecked)
+(checked exceptions must be caught or specified, catch-or-specify)
+
+type method-name(parameter-list) throws exception-list {
+ // body of method
+}
+
+So Error and RuntimeException are unchecked :
+ArithmeticException, NullPointerException, IndexOutOfBoundsException
+
+other Exception subclasses rare checked (should be caught or specified)
+NoSuchMethodException
+ClassNotFoundException
+IllegalAccessException
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
