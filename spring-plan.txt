@@ -1,6 +1,6 @@
 
 /*************************
-Spring Theory (3 days) :
+Spring Theory (4 days) :
 *************************/
 -java dependency injection (0.5 days)
 -automatic/java/xml configuration (1.5 days)
@@ -8,9 +8,8 @@ Spring Theory (3 days) :
 -jdbc (0.25 days)
 -jpa (0.25 days)
 -tomcat and servlets (0.25 days)
--rest concepts (0.25 days)
+-http/rest concepts (0.25 days)
 
--aspect oriented programming (0.5 days)
 -spring mvc (0.5 days)
 -spring boot (0.5 days)
 
