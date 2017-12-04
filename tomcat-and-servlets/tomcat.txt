@@ -1,0 +1,58 @@
+/**************
+Apache Tomcat :
+**************/
+
+A Java capable HTTP server is known as a servlet container. Apache Tomcat is one of the most popular. 
+
+Installation Directories : 
+
+1. CATALINA_HOME=/opt/tomcat (manual installation) -> this is the main installation directory of Tomcat, containing the server's jar files, startup scripts, configuration and 
+web applications. Some installations may have a separate CATALINA_BASE directory for each instance. 
+
+bin - startup scripts and libraries
+lib - server jar files
+conf : instance configuration, e.g. web.xml, tomcat-users.xml, contex.xml, server.xml etc.
+	-> server.xml - server settings like default TCP port
+	-> web.xml - servlet (.class or .war) to url mapping
+	-> context.xml - reloadable context
+	-> tomcat-users.xml - credentials for tomcat manager application
+logs : instance log files  
+webapps : web applications (.war files)
+temp : temporary files
+
+
+/**************************
+Web application deployment :
+***************************/
+
+During manual installation, we've configured CATALINA_HOME and CATALINA_BASE to be the same.
+
+CATALINA_BASE/webapps/applicationName : for static content, also called the context root 
+CATALINA_BASE/webapps/applicationName/WEB-INF/ : not visisble to clients
+CATALINA_BASE/webapps/applicationName/WEB-INF/web.xml : application's web descriptor file, contains url to servlet mapping
+CATALINA_BASE/webapps/applicationName/WEB-INF/classes : for storing servlets (.class files)
+
+Compilation requires Java's servlet API. This jar is not in Java's standard packages, but Tomcat provides it in CATALINA_HOME/lib/servlet-api.jar
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

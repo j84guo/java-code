@@ -1,36 +1,40 @@
+/***********************
+Spring Theory (3 days) :
+************************/
 
-/*************************
-Spring Theory (4 days) :
-*************************/
 -java dependency injection (0.5 days)
 -automatic/java/xml configuration (1.5 days)
 -spring data (0.5 days)
 -jdbc (0.25 days)
--jpa (0.25 days)
--tomcat and servlets (0.25 days)
--http/rest concepts (0.25 days)
+-jpa/hibernate (0.25 days)
+-http/rest (0.25 days)
+-tomcat/servlets (0.25 days)
 
--spring mvc (0.5 days)
 -spring boot (0.5 days)
+-spring mvc (0.5 days)
 
-/****************************
-Spring Application (4 days) :
-****************************/
--rest service (0.5 days)
--spring mvc (1 days)
+
+/************************************
+Social Media Consolidation (5 days) :
+-Spring MVC backend
+-Javascript frontend
+-Possibly some simple JDBC with PostgreSQL
+*************************************/
+
+-spring mvc (0.25 days)
+-rest service (0.25 days)
+-form submission (0.25 days)
 -rest template (0.25 days)
+
 -accessing twitter data + twitter registration (0.25 days)
 -accessing facebook data + facebook registration (0.25 days)
--form submission (0.25 days)
--angular js & jquery (1 days)
--uploading files (0.5 days)
--docker (0.5 days)
--spring cloud (0.5 days)
--gradle + maven (1 days)
 
-/************************
-Spring Project (4 days)
-************************/
-social media consolidation project (4 days)
+-javascript (1 days)
+-react (1 days)
+-html/css (1 days)
 
+-uploading files (0.25 days)
+-docker (0.25 days)
+-spring cloud (0.25 days)
+-gradle + maven (0.25 days)
 

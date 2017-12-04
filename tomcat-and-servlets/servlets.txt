@@ -1,0 +1,138 @@
+/**************
+Java Servlets :
+**************/
+
+Introduction : 
+
+In the internet's early days, web servers delivered static content. Java servlets are server side programs which process requests and return a dynamic response. These can be based on user input (seaerch engines, online shopping) or time-sensitive data (weather, stock prices, media). Java servlets are essentially a layer of abstraction on top of network sockets, and form the foundation of any Java server side technology, e.g. Spring MVC, Struts, etc.
+
+
+Servlet Containers :
+
+A servlet container is a java compatible http server. It will listen on system sockets for incoming TCP packets and invoke servlets to generate a response. 
+
+
+Servlet Lifecycle :
+
+1. Load servlet class
+-> servlet container loads class definition
+
+2. Create instance of servlet
+-> typically there is just one instance of a servlet, but this is up to the container  
+
+3. Call servlet's init() method
+-> allows the servlet object to initialise itself before use
+
+4. Call servlet's service() method
+-> called for each request, in http servlets this will then call doPost(), doGet(), etc.
+
+5. Call servlet's destroy() method
+-> container shutdown or container reloads application at runtime
+
+Steps 1.2,3 are called once, at the first request. 
+Step 4 is repeated for each request. 
+Step 5 is called once, on server shutdown.
+
+
+/****************
+Servlet classes :
+*****************/
+
+Servlets are just normal Java classes which implement the javax.servlet.Servlet interface. This is often done by extending HttpServlet or GenericServlet. The HttpServlet 
+class request processing methods take two parameters,  HttpServletRequest and HttpServletResponse. 
+
+
+HttpServletRequest :
+
+request.getParameter("paramName") // returns the parameter, whether it was in the query string of the request body
+request.getHeader("Content-Length") // gets the http header based on name
+request.getInputStream() // raw byte stream from reques body (must be called before request.getParameter())
+request.getSession() // returns an object representing the http session
+
+
+HttpServletResponse : 
+
+// To write an html response, simply get a PrintWriter from the response object. 
+PrintWriter writer = response.getWriter();
+writer.write("<html><body>GET/POST response</body></html>");
+
+// Headers can be set in the repsonse object 
+response.setHeader("Header Name", "Header Value");
+
+// To write binary data back, set the content type to the appropriate mime type and use the reponse object's OutputStream
+OutputStream outputStream = response.getOutputStream();
+outputStream.write(...);
+
+// Redirecting a browser 
+response.sendRedirect("http://newurl.com");  	
+
+
+HttpSession : 
+
+An http session contains information about the user across multiple http requests. 
+Use request.getSession() to access the session object and session.setAttribute("userName", "theUserName") to set attributes.
+
+
+RequestDispatcher : 
+
+This is an object obtained from the request using request.getRequestDispatcher("/newUrl") which points to another servlet. It can forward requests to the other servlet 
+using requestDispatcher.forward(request, response) or requestDispatcher.include(request, response). Since the other servlet is passed the same references, both servlets
+can merge their response objects together. This is what Spring MVC framework does.  
+
+
+ServletContext :
+
+The servlet context conatins information about your application, access it with ServletContext context = request.getSession().getServletContext(). You can get and set 
+attributes, like with sessions.
+
+
+web.xml configuration : 
+
+The <web-app> root contains some <servlet> and <servlet> mapping elements which route requests to the correct servlet class. The servlet element can contain 
+init(ServletConfig servletConfig) parameters for a servlet class, using this xml. They are accessed from the class using servletConfig.getInitParameter("myParam"). 
+
+<init-param>
+    <param-name>myParam</param-name>
+    <param-value>paramValue</param-value>
+</init-param> 
+
+Other configuration includes loading the servlet into memory on server startup and context parameters.
+
+
+.war file packaging :
+
+A java servlet application may be packaged as a .war file. This is essentially a zipped file which includes static content at the root and a WEB-INFO directory which
+contains web.xml for url to servlet mapping, classes directory for compiled servlets and lib for application libraries. 
+
+
+Note that compilation of a servlet requires CATALINA_HOME/lib/servlet-api.jar
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

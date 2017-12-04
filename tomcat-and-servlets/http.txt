@@ -73,20 +73,3 @@ In HTTP/1.1 connections persist by default and the client may send ConnectionL C
 Cache-Control :
 
 Cache-Control: no-cache tells a proxy to re-fetch the content
-
-/**************
-Java Servlets :
-**************/
-
-In the internet's early days, web servers delivered static content. Java servlets are server side programs which process requests and return a dtnamic response. These
-can be based on user input (seaerch engines, online shopping) or time-sensitive data (weather, stock prices, media). Java servlets are the foundation of any server
-side technology, others are based on servlets, e.g. Spring, Struts, etc.
-
-
-/**************
-Apache Tomcat :
-**************/
-
-A Java capable HTTP server is known as a servlet container. Apache Tomcat is one of the most popular. 
-
-
