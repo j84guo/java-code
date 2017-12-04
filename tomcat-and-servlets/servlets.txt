@@ -99,13 +99,40 @@ init(ServletConfig servletConfig) parameters for a servlet class, using this xml
 Other configuration includes loading the servlet into memory on server startup and context parameters.
 
 
-.war file packaging :
+/******************
+Tomcat Deployment :
+*******************/
 
-A java servlet application may be packaged as a .war file. This is essentially a zipped file which includes static content at the root and a WEB-INFO directory which
-contains web.xml for url to servlet mapping, classes directory for compiled servlets and lib for application libraries. 
 
+Compilation :
 
 Note that compilation of a servlet requires CATALINA_HOME/lib/servlet-api.jar
+
+
+
+Packaging as a .war file :
+
+A java servlet application may be packaged as a .war file. This is essentially a zipped file which includes static content at the root and a WEB-INFO directory which
+contains web.xml for url to servlet mapping, classes directory for compiled servlets and lib for application libraries. You chould start from the application's context 
+root and run jar -cvf folderName.war, then move the created war file to webapps. Restart Tomcat and a folder named folderName will have been build buy Tomcat.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
