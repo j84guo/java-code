@@ -14,24 +14,19 @@ Spring Theory (3 days) :
 -spring mvc (0.5 days)
 
 
-/************************************
-Social Media Consolidation (5 days) :
+/*****************************************
+Social Media Consolidation (6 days) :
 -Spring MVC backend
--Javascript frontend
+-Html/Css/Javascript frontend
 -Possibly some simple JDBC with PostgreSQL
-*************************************/
-
--spring mvc (0.25 days)
--rest service (0.25 days)
+******************************************/
 -form submission (0.25 days)
 -rest template (0.25 days)
-
 -accessing twitter data + twitter registration (0.25 days)
 -accessing facebook data + facebook registration (0.25 days)
 
--javascript (1 days)
--react (1 days)
--html/css (1 days)
+-simple javascript (2 days)
+-html/css (2 days)
 
 -uploading files (0.25 days)
 -docker (0.25 days)
