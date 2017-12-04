@@ -1,0 +1,43 @@
+// gradle dependencies
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.9.RELEASE")
+    }
+}
+
+// apply plugins, some are built in while others are third party 
+apply plugin: 'java'
+
+// spring boot plugin builds a fat jar including the application dependencies 
+// marks the jar as executable in the manifest
+// and uses spring boot dependency system
+apply plugin: 'org.springframework.boot'
+
+// jar file name and version
+jar {
+    baseName = 'jackson-spring-mvc'
+    version =  '0.1.0'
+}
+
+// application dependency repository
+repositories {
+    mavenCentral()
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+// list dependencies in maven notation
+dependencies {
+    // thymeleaf templating engine
+    compile("org.springframework.boot:spring-boot-starter-thymeleaf")
+    
+    // not sure what this is 
+    compile("org.springframework.boot:spring-boot-devtools")
+    
+    // testing with junit
+    testCompile("junit:junit")
+}
