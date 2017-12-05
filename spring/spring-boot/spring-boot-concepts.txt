@@ -21,8 +21,18 @@ org.apache.tomcat.embed:tomcat-embed-core
 org.apache.tomcat.embed:tomcat-embed-el
 org.apache.tomcat.embed:tomcat-embed-logging-juli
 
-Spring boot replaces these with : org.springframework.boot:spring-boot-starter-web. 
+Spring boot replaces these with : org.springframework.boot:spring-boot-starter-web. Starter dependencies are really just a maven pom file which specifies the group of libraries. Their
+versions are determined based on the version of Spring Boot, and they have been tested to work together. Of course certain libraries in a starter can be excluded using build tool semantics,
 
+e.g. 
+compile("org.springframework.boot:spring-boot-starter-web") {
+	exclude group: 'com.fasterxml.jackson.core'
+}
+
+Or a newer version can be specified as :
+compile("com.fasterxml.jackson.core:jackson-databind:2.4.3") 
+
+Note that gradle favours the latest version by default.
 
 /*******************
 Spring Initializer :
@@ -62,6 +72,11 @@ contextLoads() - An empty test class which will indicate that Spring's applicati
  
 Optional file which configures the application, e.g. server.port=8000
 
+
+4. Gradle and Maven Plugins :
+
+The main purpose of the build tool plugins is to package a Spring Boot application into a so called "fat jar", which includes both the application and dependencies. A main manifest is also added 
+indicating which class contains the main method, thereby making the jar executable with java -jar. 
 
 
 
