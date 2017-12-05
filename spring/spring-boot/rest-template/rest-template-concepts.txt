@@ -1,0 +1,15 @@
+/*********************
+Spring REST Template :
+**********************/ 
+
+Spring provides a rest client which can make HTTP requests in a signle method call.
+
+
+/********
+Jackson :
+*********/
+
+Jackson is a popular library for handling json and xml. @JsonIgnoreProperties indicates that json key's that are not declared in the class are ignored. If custom field to key mappings are desired,
+the @JsonProperty annotation can be used.
+
+
