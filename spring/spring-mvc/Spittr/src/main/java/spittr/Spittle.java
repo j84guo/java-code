@@ -5,6 +5,7 @@ import java.util.Date;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
+// object represents a post
 public class Spittle {
 
   private final Long id;

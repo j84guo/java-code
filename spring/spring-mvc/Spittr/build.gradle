@@ -27,6 +27,7 @@ dependencies {
     testCompile "org.hamcrest:hamcrest-library:$hamcrestVersion" // hamcrest
 }
 
+// maven repositories to look in
 repositories {
 	maven { url 'http://maven.springframework.org/release' }
 	maven { url 'http://maven.springframework.org/milestone' }
@@ -35,10 +36,12 @@ repositories {
 	mavenCentral()
 }
 
+// gradle wrapper version
 task wrapper(type: Wrapper) {
     gradleVersion = '2.1'
 }
 
+// name of .war file
 war {
         baseName = 'spittr'
 }

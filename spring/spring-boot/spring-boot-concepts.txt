@@ -1,0 +1,73 @@
+/************
+Spring Boot :
+************/
+
+The main features of Spring Boot are :
+
+1. Automatic configuration
+2. Starter (function based) dependencies
+
+Spring boot creates beans if it detects them in your classpath, then wires them automatically. Starter dependencies are just standard Gradle or Maven dependencies which use transitive dependencies
+to bundle together related libraries. You just declare a starter dependency using its name, usually some functionality, e.g. web. 
+
+For example, consider a REST api which serves json from a tomcat container and uses declarative validation. The following 8 dependencies would be needed :
+
+org.springframework:spring-core
+org.springframework:spring-web
+org.springframework:spring-webmvc
+com.fasterxml.jackson.core:jackson-databind
+org.hibernate:hibernate-validator
+org.apache.tomcat.embed:tomcat-embed-core
+org.apache.tomcat.embed:tomcat-embed-el
+org.apache.tomcat.embed:tomcat-embed-logging-juli
+
+Spring boot replaces these with : org.springframework.boot:spring-boot-starter-web. 
+
+
+/*******************
+Spring Initializer :
+*******************/
+
+http://start.spring.io
+
+Web based interface that setups up your working directory, i.e. directory structure and build files.
+
+
+/**********************
+Application Structure :
+***********************/
+
+1. Main application : bootstraps Spring Boot and serves as the central configuration class. 
+
+@SpringBootApplication - enables component scanning, auto-configuration (class path based bean creation), and designates the class as a configuration class
+	-> @Configuration - Spring configuration class.
+	-> @ComponentScan - Enables component scanning for user beans (annotated with) @Component/@Controller and registers them in the application context.
+	-> @EnableAutoConfiguration - Rather than declare beans explicitly, Spring finds and wires beans based on classpath detection.
+				      Note that a traditional explicit java configuration class would import some dependency and instantiate it in an @Bean method. 
+				      @EnableAutoConfiguration determines what you need based on your wiring specifications (@Autowired) and creates beans from the classpath classes.
+
+SpringApplication.run(MyApplication.class, args) - starts the application by running it with Spring.
+
+
+2. JUnit Test classes :
+
+@Runwith(SpringJUnit4ClassRunner.class) - indicates the application context should be created by spring first, then the test class can be run by a junit test runner
+@SpringApplicationConfiguration(classes = MyApplication.class) - indicates where the main Spring Boot configuration class is
+@WebAppConfiguration - presumably for Spring MVC initialization
+contextLoads() - An empty test class which will indicate that Spring's application context has loaded. This is because Spring would fail before using a junit test runner if there were configuration 
+		 problems.
+
+
+3. Application properties : 
+ 
+Optional file which configures the application, e.g. server.port=8000
+
+
+
+
+
+
+
+
+
+

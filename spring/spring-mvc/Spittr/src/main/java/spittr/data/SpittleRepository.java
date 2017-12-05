@@ -4,6 +4,7 @@ import java.util.List;
 
 import spittr.Spittle;
 
+// post repository
 public interface SpittleRepository {
 
   List<Spittle> findRecentSpittles();

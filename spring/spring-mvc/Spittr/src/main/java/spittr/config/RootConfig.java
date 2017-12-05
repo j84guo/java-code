@@ -1,3 +1,5 @@
+// configures application context for the ContextLoaderListener
+
 package spittr.config;
 
 import java.util.regex.Pattern;

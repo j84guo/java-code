@@ -19,3 +19,27 @@ With getServletConfigClasses(), we've asked the DispatcherServlet to load its ap
 These beans like controllers, view resolvers and handler mappings. In parallel, the ContextLoaderListener is A SECOND application context which holds 
 beans from the data tier, the models, as well as miscellaneous others. ContextLoaderListener is configured using the classes from getRootConfigClasses(),
 in this case RootConfig.class.  
+
+
+/*************************
+Spring MVC Bootstrapping :
+*************************/
+
+1. java based bootstrap
+
+-web application .war is deployed in servlet container
+-servlet container searches for classes which implement the standard ServletContainerInitializer (using java's ServiceLoader)
+-spring's initializer class is found and instantiated 
+-the spring intializer class searches classpath for WebApplicationInitializer implementations (e.g. AbstractAnnotationConfigDispatcherServletInitializer)
+-your web application initializer class is found and instantiated by spring's initializer 
+-configuration files/classes are processed
+-DispatcherServlet is instantiated
+
+
+2. web.xml based boostrap
+
+-web application .war is deployed in servlet container
+-servlet container reads web.xml
+-if <listener> defines spring's ContextLoaderListener, it is instantiated by the servlet container 
+-ContextLoaderListener processes root application context 
+-DispatcherServlet is intantiated by servlet container and creates its own application context  

@@ -2,6 +2,7 @@ package spittr.web;
 
 import spittr.Spitter;
 
+// represents a registration form
 public class RegisterForm {
   private String firstName;
   private String lastName;

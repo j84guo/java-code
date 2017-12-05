@@ -27,6 +27,7 @@ public class SpittleController {
     this.spittleRepository = spittleRepository;
   }
 
+  // find list
   @RequestMapping(method=RequestMethod.GET)
   public List<Spittle> spittles(
       @RequestParam(value="max", defaultValue=MAX_LONG_AS_STRING) long max,
@@ -34,6 +35,7 @@ public class SpittleController {
     return spittleRepository.findSpittles(max, count);
   }
 
+  // find by id
   @RequestMapping(value="/{spittleId}", method=RequestMethod.GET)
   public String spittle(
       @PathVariable("spittleId") long spittleId, 
@@ -42,6 +44,7 @@ public class SpittleController {
     return "spittle";
   }
 
+  // form submission for new post
   @RequestMapping(method=RequestMethod.POST)
   public String saveSpittle(SpittleForm form, Model model) throws Exception {
     spittleRepository.save(new Spittle(null, form.getMessage(), new Date(), 

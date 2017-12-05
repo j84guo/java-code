@@ -1,3 +1,5 @@
+// configures application context for the DispatcherServlet
+
 package spittr.web;
 
 import org.springframework.context.annotation.Bean;
@@ -30,7 +32,6 @@ public class WebConfig extends WebMvcConfigurerAdapter {
   
   @Override
   public void addResourceHandlers(ResourceHandlerRegistry registry) {
-    // TODO Auto-generated method stub
     super.addResourceHandlers(registry);
   }
 

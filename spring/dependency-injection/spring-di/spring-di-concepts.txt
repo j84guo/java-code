@@ -1,3 +1,20 @@
+/***********
+xml basics :
+************/
+
+Since xml formats are user defined, there may be conflicts in element names. Therefore elements can be prefixed to precent ambiguity. E.g. <h:table> vs <f:table>. Prefixes could also clash of course,
+so they are associated with a unique namespace, usually a URL. E.g. xmlns:h="http://www.w3.org/TR/html4/", note that the processor does not visit this url, the point is to establish uniqueness. 
+A way to avoid prefixes is to establish a default namespace using xmlns="<url>" as an attribute in the root element.
+
+xsd is a w3c recommendation to formalize the description of xml semantics. Is is itself valid xml!
+
+Often xmlns:sxi="<url>" declares a namespace for the xsi prefix. xsi usually points to an xsd definition.
+
+
+/******************************
+Spring Configuration Techniques
+*******************************/
+
 The Spring container (BeanFactory or more commonly ApplicationContext) is reponsible for creating beans and injecting them into other objects (wiring). The
 wiring specification can be declared in three main ways : explicit xml, explicit java and automatic configuration (implicit bean discovery and automatic
 injection).
@@ -24,8 +41,6 @@ Constructor Injection :
 <bean id="cdPlayer" class="package.CDPlayer" c:cd-ref="compactDisc"/>
 
 
-
-
 /*******************************************************************
 2. Explicit Java configuration
 ********************************************************************/
@@ -46,6 +61,7 @@ case) or include the desired dependency type in the method parameters, Spring wi
 
 Note that @Autowired is not unique to automatic configuration. It is used in any bean to declare a dependency, regardless of the configuration method.
 
+
 /*******************************************************************
 3. Implicit bean discovery and autowiring (Automatic configuration)  
 ********************************************************************/
@@ -53,7 +69,7 @@ Note that @Autowired is not unique to automatic configuration. It is used in any
 Autowiring is achieved in two phases :
 
 Component scanning 
----> Spring discovers beans to be created in the application context
+---> Spring discovers user defined beans to be created in the application context (note that external beans still need to be explicitly imported and declared in java config)
 Autowiring 
 ---> Spring automatically injects dependencies
 

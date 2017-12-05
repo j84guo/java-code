@@ -29,7 +29,7 @@ public class JdbcSpitterRepository implements SpitterRepository {
         spitter.getFirstName(),
         spitter.getLastName(),
         spitter.getEmail());
-    return spitter; // TODO: Determine value for id
+    return spitter;
   }
 
   public Spitter findByUsername(String username) {
@@ -50,5 +50,4 @@ public class JdbcSpitterRepository implements SpitterRepository {
           rs.getString("email"));
     }
   }
-
 }

@@ -1,3 +1,8 @@
+// programmatically initializes DispatcherServlet to receive all requests to spittr root context
+// note that container initially looks for classes which implement ServletContainerInitializer
+// this class is found, instantiated, performs spring configuration using the classes specified
+// lastly the DispatcherServlet is initialized
+
 package spittr.config;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
