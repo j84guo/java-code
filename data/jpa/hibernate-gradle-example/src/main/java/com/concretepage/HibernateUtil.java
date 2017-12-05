@@ -6,19 +6,20 @@ import org.hibernate.cfg.Configuration;
 
 public class HibernateUtil {
 
-	 // shared SessionFactory singleton
+     // shared SessionFactory singleton
      private static SessionFactory sessionFactory;
-     
-     // static blocks generally initialize static variables 
+
+     // static blocks generally initialize static variables
      static {
 
      	// configures hibernate for database
-    	Configuration configuration = new Configuration().configure();
-    	
-    	// builder is ussed to get a session factory
+	// configuration xml is fetched from a known location (resources directory) and configures Hibernate to use mysql
+	Configuration configuration = new Configuration().configure();
+
+    	// builder is used to get a session factory
     	StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
-        
-    	// session factory is used to create sessions 
+
+    	// session factory is used to create sessions
         sessionFactory = configuration.buildSessionFactory(builder.build());
      }
 
@@ -26,4 +27,4 @@ public class HibernateUtil {
     public static SessionFactory getSessionFactory() {
         return sessionFactory;
     }
-} 
+}

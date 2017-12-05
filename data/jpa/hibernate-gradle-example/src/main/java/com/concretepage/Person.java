@@ -7,6 +7,7 @@ import javax.persistence.Table;
 
 // JPA entity to persist
 // see how JPA specification defines the annotations that ORM implentations must use
+// Hibernate uses the annotation information to persist objects correctly
 @Entity
 @Table(name="person")
 public class Person {

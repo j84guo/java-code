@@ -65,7 +65,7 @@ hibernate.connection.pool_size - hibernate connection pool
 4.2 Session : Lightweight connection to database
 Entity POJO's can be persistent (saved) or transient (not saved).  Provides methods such as get(), delete(), update
 
-4.3 Mapping file : CML which defines object to table relationship (field to column, id, class name to table name) generally named as .hbm.xml.
+4.3 Mapping file : XML which defines object to table relationship (field to column, id, class name to table name) generally named as .hbm.xml.
 
 4.4 Annotations : A less verbose alternative to xml mapping is to use Java annotations, see examples.
 
