@@ -1,0 +1,44 @@
+// builds .war file for servlet container deployment
+apply plugin: 'war'
+
+// application dependencies
+dependencies {
+
+    // application code
+    compile "org.springframework:spring-webmvc:$springVersion" // spring mvc
+	compile "org.springframework:spring-jdbc:$springVersion" // spring jdbc
+	compile "com.h2database:h2:$h2Version" // hibernate
+	compile "org.hibernate:hibernate-validator:$hibernateValidatorVersion" // validates objects
+	compile "org.apache.commons:commons-lang3:$commonsLangVersion" // miscellaneous utilities, from strings to threads
+
+    // views
+    // this stuff it completely obsolete
+    // much better to learn html, css, javascript
+    // note that providedCompile means the dependency will not be packaged into the war (included in servlet container)
+    compile "javax.servlet:jstl:$jstlVersion" // jstl
+    providedCompile "javax.servlet:javax.servlet-api:$servletApiVersion" // java servlet specification
+    providedCompile "javax.servlet.jsp:jsp-api:$jspApiVersion" // jsp
+    providedCompile "javax.el:javax.el-api:$jspElVersion" // el
+
+    // testing
+    testCompile "junit:junit-dep:$junitVersion" // junit
+    testCompile "org.springframework:spring-test:$springVersion" // sprint test module
+    testCompile "org.mockito:mockito-core:$mockitoVersion" // mockito
+    testCompile "org.hamcrest:hamcrest-library:$hamcrestVersion" // hamcrest
+}
+
+repositories {
+	maven { url 'http://maven.springframework.org/release' }
+	maven { url 'http://maven.springframework.org/milestone' }
+	maven { url 'http://maven.springframework.org/snapshot' }
+	maven { url 'http://download.java.net/maven/2' }
+	mavenCentral()
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.1'
+}
+
+war {
+        baseName = 'spittr'
+}
