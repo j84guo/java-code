@@ -5,8 +5,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-
-@Entity // jpa entity
+// jpa entity
+// note that spring boot should automatically configure h2 database to work with hibernate
+@Entity
 public class Book {
 
     @Id
