@@ -5,6 +5,11 @@
 4. Scala and Spark
 5. Go messenge
 
+Links :
+https://www.ibm.com/developerworks/systems/library/es-nweb/index.html
+https://www.ibm.com/developerworks/community/blogs/aixpert/entry/how_does_a_webserver_actually_work_find_out_with_nweb58?lang=en
+
+
 (Machine Learning)
 Picture recognition
 In-memory caching algorithm based on most popular queries.
