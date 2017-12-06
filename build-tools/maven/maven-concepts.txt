@@ -1,0 +1,91 @@
+/********************
+Maven Core Concepts :
+********************/
+
+Maven is centered around the concept of POM (project object model) files. It is an XML representation of a project including source code, test, 
+dependencies, etc. The POM should be located at the project root.
+
+Maven generally reads the POM, downloads dependencies into the local repository, executes life cycles, build phases and goals, and execute plugins. 
+
+The POM file containes build life cycles (phases, goals) dependencies (jar files), build plugins and build profiles.
+
+1. POM
+Maven commands execute using a particular POM file.
+
+2. Build life cycles, phases and goals
+A lifecycle contains a sequence of build phases, and each phase consists of a sequence of goals. When you run maven, you pass a command to indicate 
+a build life cycle, phase or goal. If a build phase is requested, all previous phases are executed too.
+
+3. Dependencies and Repositories
+Dependencies are external jar files that the project uses. If dependencies are not found in the local Maven repository, Maven downloads them and stores
+them locally. 
+
+4. Plugins 
+Plugins insert extra goals into a phase, there are standard and custom plugins written in Java.
+
+5. Profiles 
+Settings to build for different deployment environments.
+
+
+Common pom.xml elemetns :
+modelVersion - POM version
+groupId - identifies an organization or project (defines a namespace for artifacts)
+	  Note that by using dot notation for the group name, Maven repositories store the jar under a directory structure mathching the tokens.
+artifactId - name of jar file, subdirectory under group directory path
+versionId - artifact version (see major/minor/bugfix versioning), subdirectory under artifact path
+
+Super POM :
+Maven POM's all inherit from a super pom. By default, it is the base pom. Specified using 
+<parent>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>my-parent</artifactId>
+        <version>2.0</version>
+        <relativePath>../my-parent</relativePath>
+</parent>
+
+Inheriting pom overrides parent pom settings. 
+
+The effective POM (after combining) can be viewed with mvn help:effective-pom
+
+Settings File :
+ar project root, settings.xml
+Local repository location
+Active bild profile
+
+Dependencies :
+<dependencies>
+	<dependency>
+          <groupId>org.jsoup</groupId>
+          <artifactId>jsoup</artifactId>
+          <version>1.7.1</version>
+	</dependency>
+</dependencies>
+
+
+External dependencies can be specified as 
+<scope>system</scope>
+<systemPath>${basedir}\war\WEB-INF\lib\mydependency.jar</systemPath>
+
+Snapshot :
+Dependency under development, always downloaded by mve, uses <version>-SNAPSHOT syntax
+
+Maven Repositories :
+Servers with jar libraries and pom metadata, allowing for recrsursively downloading the dependency tree. 
+Local - local directory, use mvn install to install projects locally 
+Central - standard public repository
+Remote - internet or local network
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<systemPath>${basedir}\war\WEB-INF\lib\mydependency.jar</systemPath>
