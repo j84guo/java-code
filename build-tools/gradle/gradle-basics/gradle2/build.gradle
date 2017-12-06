@@ -1,0 +1,15 @@
+apply plugin: "java"
+
+defaultTasks 'buildTask'
+
+task compileTask {
+	doFirst{
+		println "starting compile task"
+	}
+}
+
+task buildTask (dependsOn : compileTask) {
+	doFirst {
+		println "starting build task"
+	}
+}

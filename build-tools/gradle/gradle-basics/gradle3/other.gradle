@@ -1,0 +1,6 @@
+println "configuring other build script"
+task otherTask {
+	doLast {
+		println "executing task in other script"
+	}
+}

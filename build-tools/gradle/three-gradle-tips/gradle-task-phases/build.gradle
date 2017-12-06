@@ -1,0 +1,8 @@
+task myTask {
+	println "We are currently in the configuraton stage, defining a variable"
+	def str = "Hello World!"
+	doLast {
+		println "Now we are in the execution stage, printing the variable"
+		println str
+	}
+}
