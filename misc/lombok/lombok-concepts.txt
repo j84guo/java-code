@@ -1,0 +1,34 @@
+/*******
+Lombok :
+********/
+
+Lombok is a Java annotation library which aims to reduce developer boilerplate code. It creates getters/setters, constructors, equals and hashCode methods.
+All you need to do is write the class and annotate its fields.
+
+Getters and Setters :
+At the method level, @Getter and @Setter generate standard getter and setter during compilation. At the class level, they do this for all non-static fields.
+Final fields will not have setters.
+
+Constructors :
+@lombok.RequiredArgsConstructor - constructor for all final fields, use field order
+@NoArgsConstructor - empty constructor
+@AllArgsConstructor - constructor for all fields
+
+Hash code and Equals :
+@lombok.EqualsAndHashCode(of = {“number”, “text”}) - checks object logical equality based on the specified field types
+
+To String :
+@lombok.ToString - string representation of class, can exclude fields using parameter exclude="fieldName"
+
+Logging :
+Creates a logger field called log. The annotation is named based on the library used, @log4j, @slf4j 
+
+Data
+@lombok.Data - Combines @Getter, @Setter, @EqualsAndHashCode, @ToString, @RequiredArgsContructor
+
+/*********
+Delombok :
+*********/
+
+View the source code as if Lombok had added its features.
+java -jar <path_to_lombok.jar> delombok fileName -d outDir
