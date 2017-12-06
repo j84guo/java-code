@@ -16,14 +16,14 @@ public class MyRestController {
 
     @RequestMapping(value="/text")
     public String text() {
-        return "This is some plain text.";
+        return "This is a plain text string.";
     }
 
+    // by default, the dispatcher servlet converts objects to json
     @RequestMapping(value="/quote")
     public Quote quote() {
         RestTemplate restTemplate = new RestTemplate();
         Quote quote = restTemplate.getForObject("http://gturnquist-quoters.cfapps.io/api/random", Quote.class);
         return quote;
     }
-
 }
