@@ -76,11 +76,23 @@ Central - standard public repository
 Remote - internet or local network
 
 
+Default Life Cycles :
 
+3 independent life cycles which handle different parts of the build process.
 
+default - compiles/packages
+clean - removes temporary file from output directory
+site - generates documentation
 
+The default life cycle is not run directly, rather you specify a specific phase or goal.
+validate - verifies project structure and dependencies downloaded
+compile - compiles source code
+test - unit tests using a framework
+package - packages to jar
+install - installs project locally
+deploy - copies project jar to a remote repository
 
-
+e.g. mvn package // also executes all previous phases!
 
 
 
