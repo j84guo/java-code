@@ -1,0 +1,14 @@
+Dec 8 - Jan 1 (~21 days)
+
+Dec 8 - Dec 15
+-java network programming
+-social media api
+-operating systems
+
+Dec 16 - Dec 23
+-operating systems 
+-multi-threaded web server
+
+Dec 26 - Jan 1
+-c++/python
+-opencv facial recognition 
