@@ -2,12 +2,12 @@
 Dec 8 - Jan 1 (~21 days)
 ************************/
 
-Dec 8 - Dec 15
--java network programming
--social media api
--operating systems
+Dec 8 - Dec 16
+-java network programming (6)
+-social media api (3)
+-operating systems (ongoing)
 
-Dec 16 - Dec 23
+Dec 17 - Dec 23
 -operating systems 
 -multi-threaded web server
 
