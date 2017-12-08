@@ -1,9 +1,10 @@
 (TCP, UDP, HTTP, SSL)
-1. Multi-threaded C server
-2. Java network client 
-3. Kotlin package manager
-4. Scala and Spark
-5. Go messenge
+1. multi-threaded web server
+2. network client 
+3. package manager
+4. apache spark
+5. messenger
+6. data compression
 
 Links :
 https://www.ibm.com/developerworks/systems/library/es-nweb/index.html
