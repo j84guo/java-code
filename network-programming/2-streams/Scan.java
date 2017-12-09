@@ -8,18 +8,19 @@ public class Scan {
         Scanner s = null;
 
         try {
-	    // scanners parse text and convert tokens to Java primitives
+	          // scanners parse text and convert tokens to Java primitives
             s = new Scanner(
-			// buffered readers improve efficiency by limiting I/O operations
-			new BufferedReader(
-				// character reader
-				new FileReader("xanadu.txt")
-			)
-		);
+			             // buffered readers improve efficiency by limiting I/O operations
+			             new BufferedReader(
+				                // character reader
+				                new FileReader("data.txt")
+			             )
+		        );
 
             while (s.hasNext()) {
                 System.out.println(s.next());
             }
+
         } finally {
             if (s != null) {
                 s.close();
