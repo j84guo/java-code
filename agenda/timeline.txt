@@ -23,15 +23,15 @@ Jan - Apr Weekly
 
 2 week days 
 -> python/pi/opencv (8h + 1h)
--> mathematics (1 h)
--> os/c++ (1 h)
+-> mathematics (1h)
+-> os/c++ (1h)
 -> buffer (1h)
 
 2 weekend days 
 -> mathematics (1.5h + 1.5h)
--> java coding questions (1h)
--> os/c++ (1h) 
--> buffer (2h) 
+-> java coding questions (1.5h)
+-> os/c++ (1.5h) 
+-> buffer (1.5) 
 
 
 
