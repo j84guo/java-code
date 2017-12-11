@@ -1,0 +1,43 @@
+/*********
+Networks :
+*********/
+
+Introduction :
+
+Phsical Organization - A network is a collection of computers/devices that send data to and recieve data from each other. Nodes are a generic device while hosts specify general purpose computers. 
+The physical medium can be wire, wireless radio waves, or light travelling theough fiber-optic cables. 
+
+Addresses - Different networks use different addressing techniques. Internet nodes are identified by IP addresses (sequences of bytes) and organizations are allocated addresses by their 
+internet service provider. ISP's get their addresses from four regional internet registries. See ICANN and ARIN for more details. IP addresses may have textual representations, e.g. 
+www.domain.com. See DNS for more. 
+
+Transport - Modern networks are packet-switched, data is trasmitted in packets container source and destination, and each each packet is handled seperately. The advantage of breaking down 
+communication into packets is that multiple exchanges can occur on the same wire simultaneously. 
+
+Protocol - A protocol is a set of rules defining the semantics of communication, addres format, packet size, etc. 
+
+
+Network Layers :
+
+Networking challenges include collision of packets, digital to analog conversion, transport errors, routing packets, support various operating systems and mediums etc. This complexity is divided
+into layers, in order to abstract the details of the layers underneath. In theory, each layer only needs to communicate with the ones above and below it so that other layers can be implemented 
+differently without the layer in question needing to be concerned. 
+
+1. Host to Network Layer
+Defines how a particular network interface, e.g. ethernet card, sends IP datagrams over its physical connection. Sometimes we refer to the hardware which connects different computers as the 
+physical layer, we consider it part of the host to network layer. 
+
+2. Internet Layer 
+How bits/bytes are organized into packets and the addressing scheme by which computers locate each other. There are two main protocols, IPV4 (32 bit addresses) and IPV6 (128 bits). 
+Generally IPV6 packets contain more data, but all packets are big-endian by convention.
+
+3. Transport Layer
+The transport layer is concerned with directing packets to specific sockets (applications) and also to ensure the order and integrity of packets. TCP is a high overhead protocol which 
+ensures packet order and integrity, while UDP is less reliable (but still useful, e.g. video).
+
+4. Application Layer 
+Delivers data to users and defines what to do with data once it is transfered, e.g. HTTP requests. 
+
+
+Java supports TCP, UDP and application layer protocols built on top of them.
+
