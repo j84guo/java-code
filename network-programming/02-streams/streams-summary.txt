@@ -1,0 +1,40 @@
+/*************
+Byte Streams :
+**************/
+
+// InputStream - abstract base class for input byte streams
+// OutputStream - abstract base class for output byte streams
+
+FileInputStream - byte stream from file (local encoding)
+FileOutputStream - byte stream to file (assumes data is encoded using local encoding)
+
+BufferedInputStream - buffers any input stream to limit I/O
+BufferedOutputStream - buffers any output stream to limit I/O
+
+/******************
+Character Streams :
+*******************/
+
+// Reader - abstract base class for input character streams
+// Writer - abstract base class for output character streams
+
+// no need to wrap an explicit byte stream
+FileReader - character stream from file (converts characters from local encoding to java primitive which is utf-16)
+FileWriter - character stream to file (converts characters from java primitive which is utf-16 to local encoding)
+
+InputStreamReader - bytes (local encoding) to characters
+OutputStreamWriter - characters to bytes (local encoding)
+
+BufferedReader - buffered input character stream
+BufferedWriter - buffered output character stream
+
+// java types to formatted bytes (console output)
+PrintStream - output byte stream
+
+// java types to formatted characters
+PrintReader - characters to java types
+PrintWriter - java types to characters
+
+// java primitives to raw binary (saving data)
+DataInputStream - binary to primitives
+DataOutputStream - primitives to binary
