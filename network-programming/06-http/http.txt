@@ -55,21 +55,57 @@ DELETE - delete data on server
 
 Content Negotiation :
 
-A client can use request headers like Accept, Accept-Language. Accept-Charset, Accept-Encoding to as for specific data formats, which the server will try to 
-satisfy. This is known as content negotiation. 
+A client can use request headers like Accept, Accept-Language. Accept-Charset, Accept-Encoding to as for specific data formats, which the server will try to
+satisfy. This is known as content negotiation.
 
 Content-Type -> server uses MIME configuration file to map file extension and media type, e.g. .html is associated with text/html media type
 Accept-Language -> servers may associate a language with files
-Accept-Charset -> common character sets are UTF-8, ISO-8859-1, etc. 
+Accept-Charset -> common character sets are UTF-8, ISO-8859-1, etc.
 Accept-Encoding -> common encodings are x-gzip and x-compress
 
 
 Persistent (Keep-alive) Connections :
 
-In HTTP/1.0, the server closes the TCP connection after delivereing a response. This is inefficient since modern browers make many HTTP requests. 
+In HTTP/1.0, the server closes the TCP connection after delivereing a response. This is inefficient since modern browers make many HTTP requests.
 In HTTP/1.1 connections persist by default and the client may send ConnectionL Close to end the tcp connection
 
 
 Cache-Control :
 
 Cache-Control: no-cache tells a proxy to re-fetch the content
+
+
+Caching :
+
+As mentioned, Expires and Cache-control indicate to the client how to cache content.
+
+Expires
+-indicates that the content should be cached until the specified time.
+
+Cache-control
+-fine grained control
+-max-age=<seconds> expiry time in seconds from now
+-s-maxage=<seconds> shared cache expiry time in seconds from now
+-public okay to cache authenticated content
+-private only single user caches can store content
+-no-cache client should reverify the state of the resource with an ETag or Last-modified header on each access
+-no-store never cache
+-overrides Expires
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+End

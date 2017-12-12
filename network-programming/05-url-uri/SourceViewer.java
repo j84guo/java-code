@@ -19,6 +19,7 @@ public class SourceViewer {
                 // create url and open connection to the host
                 URL u = new URL(args[0]);
                 in = u.openStream();
+                System.out.println("InputStream rentered by URL openStream() is " + in.getClass().getName());
 
                 // buffer the input to increase performance
                 in = new BufferedInputStream( in );
