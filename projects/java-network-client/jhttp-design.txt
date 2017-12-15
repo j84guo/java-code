@@ -2,24 +2,27 @@
 Java HTTP Client :
 ******************
 
-Structure :
+1. General :
 -compiled as an executable fat jar
--command line parser
--http request service
--response view
+-shell script to run application
 
-Flags :
+2. Main Components :
+-CliController.java (parse flags)
+-HttpService.java (execute request)
+-ResponseViewer.java (print output based on flags)
+
+3. Helper Components :
+-HttpVerb.java // enum containing http verbs
+-QueryString.java // url encodes query string or post body
+
+4. Flags :
 -http verbs
-  -> -G --get
-  -> -P --post
-    -> --data "some url encoded body text" or --data "@some file name"
-  -> -H --head
-  -> -O --options
-
+  -> -m --method can be GET, POST, HEAD, OPTIONS
 -verbose (host ip and headers)
-  -> -v
+  -> -v --verbose has no value
 
 -request headers
+  -> -h headerName=someValue
   -> (--accept) Accept: acceptable content MIME types, e.g. Accept: text/plain
   -> (--accept-charset) Accept-Charset: acceptable character set, e.g. Accept-Charset: utf-8
   -> (--accept-encoding) Accept-Encoding: acceptable encodings, e.g. Accept-Encoding: gzip, deflate
@@ -33,3 +36,7 @@ Flags :
   -> (--host) Host: domain name of the server and TCP port number on which the server is listening, e.g. Host: en.wikipedia.org:8080
   -> (--if-modified-since) If-Modified-Since: allows a 304 Not Modified to be returned if content is unchanged, e.g. If-Modified-Since: Sat, 29 Oct 1994 19:43:31 GMT
   -> (--user-agent) User-Agent: user agent string, e.g. User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:12.0) Gecko/20100101 Firefox/12.0
+
+-request body
+  -> -d --data stringToBeUrlEncoded
+  -> -f --form sourceOfBinaryData

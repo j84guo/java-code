@@ -1,101 +1,122 @@
-package jhttp;
+// package jhttp;
 
 import java.io.BufferedReader;
-import java.io.DataOutputStream; // primitives to raw byte representation
-import java.io.InputStreamReader; // input stream of bytes
-import java.net.HttpURLConnection;
+import java.io.OutputStreamWriter;
+import java.io.InputStreamReader;
 import java.net.URL;
-
+import java.net.HttpURLConnection;
 import javax.net.ssl.HttpsURLConnection;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.List;
 
-public class HttpURLConnectionExample {
+public class HttpService {
 
-	private final String USER_AGENT = "Mozilla/5.0";
+	private static final String GET = "GET";
+	private static final String POST = "POST";
 
-	public static void main(String[] args) throws Exception {
+	private HashMap<JhttpOption, String> argMap;
+	private String urlStr;
+	private String httpMethod;
+	private String allHeaders;
+	private String data;
 
-		HttpURLConnectionExample http = new HttpURLConnectionExample();
-
-		System.out.println("Testing 1 - Send Http GET request");
-		http.sendGet();
-
-		System.out.println("\nTesting 2 - Send Http POST request");
-		http.sendPost();
-
+	public HttpService(HashMap<JhttpOption, String> argMap){
+		this.argMap = argMap;
 	}
 
-	// HTTP GET request
-	private void sendGet() throws Exception {
+	public void run(){
+		setFields();
 
-		String url = "http://www.google.com/search?q=mkyong";
+		try{
 
-		URL obj = new URL(url);
-		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+			// create url and get connection
+			URL url = new URL(this.urlStr);
+			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
-		// optional default is GET
-		con.setRequestMethod("GET");
+			// set http method
+			if(this.httpMethod == null){
+				this.httpMethod = GET;
+			}
 
-		//add request header
-		con.setRequestProperty("User-Agent", USER_AGENT);
+			connection.setRequestMethod(this.httpMethod);
 
-		int responseCode = con.getResponseCode();
-		System.out.println("\nSending 'GET' request to URL : " + url);
-		System.out.println("Response Code : " + responseCode);
+			// set headers on connection
+			setHeaders(connection);
 
-		BufferedReader in = new BufferedReader(
-		        new InputStreamReader(con.getInputStream()));
-		String inputLine;
-		StringBuffer response = new StringBuffer();
+			// todo : add body
+			// url form encoded or multipart form data
 
-		while ((inputLine = in.readLine()) != null) {
-			response.append(inputLine);
+			// print request headers
+			System.out.println("Sending " + this.httpMethod + " request to URL : " + url);
+
+			Map<String,List<String>> requestHeaders = connection.getRequestProperties();
+			for(String headerName :  requestHeaders.keySet()){
+				System.out.println(headerName + ": " + requestHeaders.get(headerName));
+			}
+			System.out.println("\n");
+
+			// connect
+			connection.connect();
+
+			Map<String,List<String>> responseHeaders = connection.getHeaderFields();
+			for(String headerName :  responseHeaders.keySet()){
+				System.out.println(headerName + ": " + responseHeaders.get(headerName));
+			}
+			System.out.println("\n");
+
+			// read and print response
+			BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+			String inputLine;
+			StringBuilder response = new StringBuilder();
+			while ((inputLine = in.readLine()) != null) {
+				response.append(inputLine);
+			}
+			in.close();
+			System.out.println(response.toString());
 		}
-		in.close();
-
-		//print result
-		System.out.println(response.toString());
-
-	}
-
-	// HTTP POST request
-	private void sendPost() throws Exception {
-
-		String url = "https://selfsolve.apple.com/wcResults.do";
-		URL obj = new URL(url);
-		HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
-
-		//add reuqest header
-		con.setRequestMethod("POST");
-		con.setRequestProperty("User-Agent", USER_AGENT);
-		con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
-
-		String urlParameters = "sn=C02G8416DRJM&cn=&locale=&caller=&num=12345";
-
-		// Send post request
-		con.setDoOutput(true);
-		DataOutputStream wr = new DataOutputStream(con.getOutputStream());
-		wr.writeBytes(urlParameters);
-		wr.flush();
-		wr.close();
-
-		int responseCode = con.getResponseCode();
-		System.out.println("\nSending 'POST' request to URL : " + url);
-		System.out.println("Post parameters : " + urlParameters);
-		System.out.println("Response Code : " + responseCode);
-
-		BufferedReader in = new BufferedReader(
-		        new InputStreamReader(con.getInputStream()));
-		String inputLine;
-		StringBuffer response = new StringBuffer();
-
-		while ((inputLine = in.readLine()) != null) {
-			response.append(inputLine);
+		catch (Exception e) {
+			System.out.println(e);
 		}
-		in.close();
-
-		//print result
-		System.out.println(response.toString());
-
 	}
 
+	private void setHeaders(HttpURLConnection connection){
+		HashMap<String, String> headers = buildHeaders();
+
+		for(String headerName : headers.keySet()){
+			String headerValue = headers.get(headerName);
+			connection.setRequestProperty(headerName, headerValue);
+		}
+	}
+
+	private HashMap<String, String> buildHeaders(){
+		HashMap<String, String> headerMap = new HashMap<String, String>();
+		if(allHeaders == null){
+			return headerMap;
+		}
+
+		String[] pairs = allHeaders.split("&");
+		for(String p : pairs){
+			String[] pair = p.split("=");
+			headerMap.put(pair[0], pair[1]);
+ 		}
+
+		return headerMap;
+	}
+
+	private void setFields(){
+		for(JhttpOption option : argMap.keySet()){
+			String value = argMap.get(option);
+
+			if(option == JhttpOption.URL){
+				this.urlStr = value;
+			}else if(option == JhttpOption.METHOD){
+				this.httpMethod = value;
+			}else if(option == JhttpOption.HEADER){
+				this.allHeaders = value;
+			}else if(option == JhttpOption.DATA){
+				this.data = value;
+			}
+		}
+	}
 }

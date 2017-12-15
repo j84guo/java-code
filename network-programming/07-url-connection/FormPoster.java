@@ -27,12 +27,12 @@ public class FormPoster {
         URLConnection uc = url.openConnection();
         uc.setDoOutput(true);
         try (OutputStreamWriter out = new OutputStreamWriter(uc.getOutputStream(), "UTF-8")) {
+
             // The POST line, the Content-type header,
             // and the Content-length headers are sent by the URLConnection.
             // We just need to send the data
             out.write(query.toString());
             out.write("\r\n");
-            out.flush();
         }
         // Return the response
         return uc.getInputStream();
