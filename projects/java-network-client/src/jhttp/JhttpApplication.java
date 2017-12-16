@@ -1,22 +1,33 @@
-// package jhttp;
+/*
+* acts as controller
+*/
 
-import java.util.*;
+// package jhttp;
 
 public class JhttpApplication {
 
-  public static void main(String[] args){
-
-    HashMap<JhttpOption, String> argMap = CliParser.parseArguments(args);
-    if(argMap == null){
-      System.out.println("usage: jhttp <options> <url>");
+  public static void main(String[] args) {
+    RequestOptions options = null;
+    try{
+      options = CommandLineParser.parse(args);
+    }catch(RuntimeException e){
+      if(e.getMessage() != null){
+        System.out.println(e.getMessage());
+      }else{
+        System.out.println("Usage: java JhttpApplication [options...] <url>");
+      }
       return;
     }
 
-    // for(JhttpOption option : argMap.keySet()){
-		//   System.out.println(option + ": " + argMap.get(option));
-		// }
+    Response response = null;
+    try{
+      HttpService service = new HttpService(options);
+      response = service.getResponse();
+    }catch(Exception e){
+      System.out.println("Error connecting to host\n" + e);
+    }
 
-    HttpService service = new HttpService(argMap);
-    service.run();
+    ResponseViewer viewer = new ResponseViewer(response);
+    viewer.printRequestAndResponse();
   }
 }

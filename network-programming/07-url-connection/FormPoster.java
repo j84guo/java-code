@@ -23,23 +23,21 @@ public class FormPoster {
     }
 
     public InputStream post() throws IOException {
-        // open the connection and prepare it to POST
-        URLConnection uc = url.openConnection();
-        uc.setDoOutput(true);
-        try (OutputStreamWriter out = new OutputStreamWriter(uc.getOutputStream(), "UTF-8")) {
+        URLConnection uc = url.openConnection(); // open the connection and prepare it to POST
+        uc.setRequestProperty("Content-Type", "application/x-www-form-urlencoded"); // when no content type is sent, the recipient may guess or assume application/octet-stream
+        uc.setDoOutput(true); // needs to be set before connect()
 
-            // The POST line, the Content-type header,
-            // and the Content-length headers are sent by the URLConnection.
-            // We just need to send the data
+        try (OutputStreamWriter out = new OutputStreamWriter(uc.getOutputStream(), "UTF-8")) {
             out.write(query.toString());
-            out.write("\r\n");
+            out.write("\r\n"); // is this needed?
         }
-        // Return the response
+
         return uc.getInputStream();
     }
 
     public static void main(String[] args) {
         URL url;
+
         if (args.length > 0) {
             try {
                 url = new URL(args[0]);
@@ -56,6 +54,7 @@ public class FormPoster {
                 return;
             }
         }
+
         FormPoster poster = new FormPoster(url);
         poster.add("name", "Elliotte Rusty Harold");
         poster.add("email", "elharo@ibiblio.org");
