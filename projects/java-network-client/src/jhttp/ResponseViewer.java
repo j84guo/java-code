@@ -19,14 +19,15 @@ public class ResponseViewer {
   private String outputFile;
 
   public ResponseViewer(Response response){
-    this.connection = response.connection; // response headers and body
-    this.requestHeaderMap = response.requestHeaderMap; // request headers
-    this.outputFile = response.outputFile; // save file or not
+    this.connection = response.connection;
+    this.requestHeaderMap = response.requestHeaderMap;
+    this.outputFile = response.outputFile;
   }
 
   public void view(){
     if(outputFile != null){
       printRequest();
+      printResponseLineAndHeaders();
       saveFile(outputFile);
     }else{
       printRequestAndResponse();
@@ -65,6 +66,11 @@ public class ResponseViewer {
   }
 
   private void printResponse(){
+    printResponseLineAndHeaders();
+    printResponseBody();
+  }
+
+  private void printResponseLineAndHeaders(){
     System.out.println("< " + connection.getHeaderField(0));
     for (int i = 1;; i++) {
         String header = connection.getHeaderField(i);
@@ -72,6 +78,9 @@ public class ResponseViewer {
         System.out.println("< " + connection.getHeaderFieldKey(i) + ": " + header);
     }
     System.out.println("<");
+  }
+
+  private void printResponseBody(){
     try(InputStream raw = connection.getInputStream()){
   		printFromStream(raw);
     }catch(Exception e){
@@ -83,7 +92,7 @@ public class ResponseViewer {
     try(BufferedInputStream buffer = new BufferedInputStream(raw)){
       InputStreamReader reader = new InputStreamReader(buffer);
       int c;
-      while((c = reader.read()) != -1){ // note that this assumes the local encoding, in this case UTF-8 
+      while((c = reader.read()) != -1){ // note that this assumes the local encoding, in this case UTF-8
         System.out.print((char) c);
       }
     }catch(Exception e){

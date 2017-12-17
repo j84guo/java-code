@@ -26,6 +26,7 @@ public class JhttpApplication {
       response = service.getResponse();
     }catch(Exception e){
       System.out.println("Error connecting to host.\n" + e);
+      return;
     }
 
     ResponseViewer viewer = new ResponseViewer(response);

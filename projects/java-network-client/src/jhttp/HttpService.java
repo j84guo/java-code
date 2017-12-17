@@ -46,16 +46,18 @@ public class HttpService {
     // 4. set http body
     if(options.data != null || options.fileName != null){
       connection.setDoOutput(true);
-    }
-    if(options.data != null){
-      connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-      try (OutputStreamWriter out = new OutputStreamWriter(connection.getOutputStream(), "UTF-8")) {
-          out.write(options.data);
-          out.write("\r\n");
-      }
-    }else if(options.fileName != null){
-      // todo : write multipart form data
+      OutputStreamWriter out = new OutputStreamWriter(connection.getOutputStream(), "UTF-8");
 
+      if(options.data != null){
+        connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+        out.write(options.data);
+        out.write("\r\n");
+      }else if(options.fileName != null){
+        FileUploader fileUploader = new FileUploader(out);
+        fileUploader.addFilePart("fileUpload", options.fileName);
+      }
+
+      out.close();
     }
 
     // 5. send request and return response object
