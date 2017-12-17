@@ -2,7 +2,7 @@
 * information needed to conduct http request
 */
 
-// package jhttp;
+package jhttp;
 
 import java.util.HashMap;
 
@@ -10,9 +10,10 @@ public class RequestOptions {
 
   String url;
   String httpMethod;
-  HashMap<String, String> headers;
   String data;
   String fileName;
+  String outputFile;
+  HashMap<String, String> headers;
 
   // builder
   public RequestOptions() {
@@ -43,17 +44,13 @@ public class RequestOptions {
     return this;
   }
 
+  public RequestOptions setOutputFile(String outputFile) {
+    this.outputFile = outputFile;
+    return this;
+  }
+
   public String toString(){
     return url + "\n" + httpMethod + "\n" + headers + "\n" + data + "\n" + fileName;
   }
-  /*
-  public static void main(String[] args){
-    RequestOptions options = new RequestOptions()
-      .setUrl("http://www.google.ca")
-      .setHttpMethod("GET")
-      .setHeaders(new HashMap<String, String>())
-      .setData("name=value")
-      .setFileName("file.txt");
-  }
-  */
+
 }

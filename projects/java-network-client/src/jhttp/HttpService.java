@@ -2,7 +2,7 @@
 * http request template
 */
 
-// package jhttp;
+package jhttp;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -18,7 +18,6 @@ public class HttpService {
 
   private static String USER_AGENT = "jhttp 1.0";
   private static String ACCEPT = "*/*";
-  private static String HOST = "";
   private static Date DATE = new Date();
 
   private RequestOptions options;
@@ -56,17 +55,17 @@ public class HttpService {
       }
     }else if(options.fileName != null){
       // todo : write multipart form data
+
     }
 
     // 5. send request and return response object
 		connection.connect();
-    return new Response(requestHeaderMap, connection);
+    return new Response(requestHeaderMap, connection, options.outputFile);
   }
 
   private void setDefaultHeaders(URL obj, HttpURLConnection connection){
     connection.setRequestProperty("Accept", ACCEPT);
     connection.setRequestProperty("User-Agent", USER_AGENT);
-    HOST = obj.getHost(); connection.setRequestProperty("Host", HOST);
     connection.setRequestProperty("Date", DATE.toString());
   }
 }

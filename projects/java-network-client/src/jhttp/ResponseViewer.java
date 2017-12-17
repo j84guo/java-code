@@ -1,8 +1,13 @@
+package jhttp;
+
 import java.net.HttpURLConnection;
 
 import java.io.InputStream;
+import java.io.BufferedInputStream;
+import java.io.FileOutputStream;
+import java.io.BufferedOutputStream;
 import java.io.InputStreamReader;
-import java.io.BufferedReader;
+import java.io.IOException;
 
 import java.util.Map;
 import java.util.List;
@@ -11,10 +16,34 @@ public class ResponseViewer {
 
   private HttpURLConnection connection;
   private Map<String, List<String>> requestHeaderMap;
+  private String outputFile;
 
   public ResponseViewer(Response response){
-    this.connection = response.connection;
-    this.requestHeaderMap = response.requestHeaderMap;
+    this.connection = response.connection; // response headers and body
+    this.requestHeaderMap = response.requestHeaderMap; // request headers
+    this.outputFile = response.outputFile; // save file or not
+  }
+
+  public void view(){
+    if(outputFile != null){
+      printRequest();
+      saveFile(outputFile);
+    }else{
+      printRequestAndResponse();
+    }
+  }
+
+  private void saveFile(String outputFile){
+		try(InputStream in = connection.getInputStream();
+        FileOutputStream out = new FileOutputStream(outputFile);
+        BufferedOutputStream bufferedOut = new BufferedOutputStream(out);){
+			int c;
+			while((c = in.read()) != -1){
+				bufferedOut.write(c);
+			}
+		}catch(Exception e){
+      System.out.println("Error saving file.\n" + e);
+    }
   }
 
   public void printRequestAndResponse(){
@@ -22,7 +51,8 @@ public class ResponseViewer {
     printResponse();
   }
 
-  public void printRequest(){
+  // todo : view restricted headers
+  private void printRequest(){
     String path = connection.getURL().getFile();
     if(path.equals("")) path = "/";
     System.out.println("> " + connection.getRequestMethod() + " " + path + " HTTP/1.1");
@@ -34,7 +64,7 @@ public class ResponseViewer {
     System.out.println(">");
   }
 
-  public void printResponse(){
+  private void printResponse(){
     System.out.println("< " + connection.getHeaderField(0));
     for (int i = 1;; i++) {
         String header = connection.getHeaderField(i);
@@ -42,15 +72,35 @@ public class ResponseViewer {
         System.out.println("< " + connection.getHeaderFieldKey(i) + ": " + header);
     }
     System.out.println("<");
-    try(BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()))){
-      String inputLine;
-  		StringBuilder response = new StringBuilder();
-  		while ((inputLine = in.readLine()) != null) {
-  			response.append(inputLine);
-  		}
-  		System.out.println(response.toString());
+    try(InputStream raw = connection.getInputStream()){
+  		printFromStream(raw);
+    }catch(Exception e){
+      printFromStream(connection.getErrorStream());
+    }
+  }
+
+  private void printFromStream(InputStream raw){
+    try(BufferedInputStream buffer = new BufferedInputStream(raw)){
+      InputStreamReader reader = new InputStreamReader(buffer);
+      int c;
+      while((c = reader.read()) != -1){ // note that this assumes the local encoding, in this case UTF-8 
+        System.out.print((char) c);
+      }
     }catch(Exception e){
       System.out.println(e);
     }
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+// end

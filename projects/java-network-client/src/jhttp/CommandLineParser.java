@@ -2,7 +2,7 @@
 * parses arguments from command line
 */
 
-// package jhttp;
+package jhttp;
 
 import java.util.HashMap;
 
@@ -13,6 +13,7 @@ public class CommandLineParser {
   private static HashMap<String, String> headers = new HashMap<String, String>();
   private static String data;
   private static String fileName;
+  private static String outputFile;
 
   public static RequestOptions parse(String[] args) {
     if(args.length == 0){
@@ -34,6 +35,8 @@ public class CommandLineParser {
             data = value;
           } else if(key.equals(JhttpOptionTypes.FILE_NAME)) {
             fileName = value;
+          } else if(key.equals(JhttpOptionTypes.OUTPUT_FILE)) {
+            outputFile = value;
           }
       }
     }
@@ -49,7 +52,8 @@ public class CommandLineParser {
       .setHttpMethod(httpMethod)
       .setHeaders(headers)
       .setData(data)
-      .setFileName(fileName);
+      .setFileName(fileName)
+      .setOutputFile(outputFile);
 
     return options;
   }

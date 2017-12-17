@@ -1,12 +1,13 @@
 /*
-* acts as controller
+* controller
 */
 
-// package jhttp;
+package jhttp;
 
 public class JhttpApplication {
 
   public static void main(String[] args) {
+
     RequestOptions options = null;
     try{
       options = CommandLineParser.parse(args);
@@ -24,10 +25,11 @@ public class JhttpApplication {
       HttpService service = new HttpService(options);
       response = service.getResponse();
     }catch(Exception e){
-      System.out.println("Error connecting to host\n" + e);
+      System.out.println("Error connecting to host.\n" + e);
     }
 
     ResponseViewer viewer = new ResponseViewer(response);
-    viewer.printRequestAndResponse();
+    viewer.view();
+
   }
 }
