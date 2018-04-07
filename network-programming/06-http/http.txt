@@ -1,0 +1,111 @@
+/************
+HTTP Review :
+************/
+
+-asymmetric request/response protocol
+-stateless
+-permits negotiating data types and representations
+-uniform resource locator identifies resources over the internet, protocol://hostname:port/path
+
+-HTTP usually runs on top of TCP/IP, but any reliable transport protocol can be used
+-IP is a network layer protocol which deals with network addresses and routing
+-TCP is a transport layer protocol which directs packets to the appropriate socket on the host and establishing connections between sockets
+
+Request :
+-requests consist of a message header and optional message body, separated by a blank line
+-the message header has a request line and request headers
+request line -> request-method request-uri http-version, e.g. GET /test.html HTTP/1.1
+request headers -> one name: value pair per line, e.g. Host: www.xyz.com, Connection: Keep-Alive, Accept: image/gif, image/jpeg, */*, Accept-Language: us-en
+request body -> optional block of text data
+
+full e.g.
+
+GET /doc/resource.html HTTP/1.1
+Host: www.imagehost.com
+Accept: image/gih, */*
+Accept-Language: en-us
+Accept-Encoding: gzip, deflate
+User-Agent: Mozilla/4.0
+Content-Length: 35
+
+Response :
+-responses consist of a message header and message body, seperated by a blank line
+-message header consists of status line and response headers
+status line -> http-version status-code reason-phrase, e.g. HTTP/1.1 200 OK, HTTP/1.1 404 Not Found
+response headers -> one name: value pair per line, e.g. Content-Type: text/html, Keep-Alive: timeout=15, max=100
+response body -> request data, e.g. html data
+
+full e.g.
+
+HTTP/1.1 200 OK
+Date: ...
+Server: ...
+Last-Modified: ...
+Content-Type: text/html
+
+<html> ... </html>
+
+HTTP request methods (verbs) :
+GET - ask for content
+HEAD - message header (status and headers) that a GET request would have obtained
+POST - send data to the server (create resource on the server in REST)
+PUT - save data on the server (update data on the server in REST)
+DELETE - delete data on server
+
+
+Content Negotiation :
+
+A client can use request headers like Accept, Accept-Language. Accept-Charset, Accept-Encoding to as for specific data formats, which the server will try to
+satisfy. This is known as content negotiation.
+
+Content-Type -> server uses MIME configuration file to map file extension and media type, e.g. .html is associated with text/html media type
+Accept-Language -> servers may associate a language with files
+Accept-Charset -> common character sets are UTF-8, ISO-8859-1, etc.
+Accept-Encoding -> common encodings are x-gzip and x-compress
+
+
+Persistent (Keep-alive) Connections :
+
+In HTTP/1.0, the server closes the TCP connection after delivereing a response. This is inefficient since modern browers make many HTTP requests.
+In HTTP/1.1 connections persist by default and the client may send ConnectionL Close to end the tcp connection
+
+
+Cache-Control :
+
+Cache-Control: no-cache tells a proxy to re-fetch the content
+
+
+Caching :
+
+As mentioned, Expires and Cache-control indicate to the client how to cache content.
+
+Expires
+-indicates that the content should be cached until the specified time.
+
+Cache-control
+-fine grained control
+-max-age=<seconds> expiry time in seconds from now
+-s-maxage=<seconds> shared cache expiry time in seconds from now
+-public okay to cache authenticated content
+-private only single user caches can store content
+-no-cache client should reverify the state of the resource with an ETag or Last-modified header on each access
+-no-store never cache
+-overrides Expires
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+End

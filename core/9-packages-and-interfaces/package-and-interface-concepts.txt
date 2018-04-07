@@ -1,0 +1,74 @@
+Packages -> are containers for classes, used to create unique namespaces. They are explicitly imported to use in classes.
+Interfaces -> define an abstract (no implementation) contract that implementations must enforce, allowing flexible code and polymorphism.
+
+Packages :
+
+Packages can hide classes from the outside world (package-private) and classes can limit how their members are accessed to the outside world 
+(protected, package-private). 
+
+Declaring a package can be done with 
+package package-name;
+
+Java uses file system directories to store packages, where the path matches each . delimited token in the package name (also known as a hierarchy of 
+packages). Most packages include many packages, all using the same package label.  
+
+The java run time uses the current directory to find classes by default. The -cp <path to folder or jar 1>:<path or jar 2> option can tell the JVM where to 
+find classes that your code imports. The class should be referred to by its fully qualified package name from above the root, java PackageName.ClassName 
+(notice other classes in the package will be found is Java will search the current directory)
+
+Similarly you need the class path to contain the packages (path to folder or zipped jar) so that compile time 
+classes may be found. Note that compiling can be done from anywhere (using the right path) and when using -cp, 
+the current folder . must be passed explicitly.
+
+The -d option can be used to specify which directory to place .class filesi.
+
+Default package : 
+Classes with no package are placed in java's default package and can access each other, but this practice is not recommended for anything non-trivial.
+
+General interface : 
+
+access interface name {
+ return-type method-name1(parameter-list);
+ return-type method-name2(parameter-list);
+ type final-varname1 = value;
+ type final-varname2 = value;
+ //...
+ return-type method-nameN(parameter-list);
+ type final-varnameN = value;
+}
+
+-interface fields are implicitly final and static, and must be initialized (constants)
+-although Java 8 adds default methods, usually interfaces will have no implementation
+
+class classname [extends superclass] [implements interface [,interface...]] {
+ // class-body
+}
+
+As mentioned previously, an interface reference can point to an implementation object, and dynamic method dispatch allows for polymorphism.
+Interfaces can also be nested.
+// A nested interface example.
+// This class contains a member interface.
+class A {
+ // this is a nested interface
+ public interface NestedIF {
+ boolean isNotNegative(int x);
+ }
+}
+// B implements the nested interface.
+class B implements A.NestedIF {
+ public boolean isNotNegative(int x) {
+ return x < 0 ? false: true;
+ }
+}
+class NestedIFDemo {
+ public static void main(String args[]) {
+ // use a nested interface reference
+ A.NestedIF nif = new B();
+ if(nif.isNotNegative(10))
+ System.out.println("10 is not negative");
+ if(nif.isNotNegative(-12))
+ System.out.println("this won't be displayed");
+ }
+}
+
+

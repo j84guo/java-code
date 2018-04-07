@@ -1,0 +1,70 @@
+Strongly typed : checking code at compile time ensures safety and robustness.
+Statically typed : variables maintain the same type they were declared as, enforcing cleaner code.
+
+/**********
+Primtives :
+**********/
+
+There are 8 primitive types (commonly used, high performance non-objects) which have a fixed range (portability across machines) and mathematical behaviour. They can be classified into 
+four groups :
+
+1. Integers (signed integers) :
+   *** Interestingly, the width of an integer describes its logical range, rather than physical memory (which is up to the JVM). ***
+   long - 64 bits (values outside the range of int)
+   int - 32 bits
+   short - 16 bits
+   byte - 8 bits (binary, network or file data)
+
+2. Floating point numbers (fractional precision) :
+   float - 32 bits
+   double - 64 bits (more precise than float)
+
+3. Characters (character set) :
+   *** Java represents characters in unicode, a character set representing all characters from all human languages. Since ASCII is a subset (0-127) of unicode, char also acts as an int of 
+   the associated ASCII value.***
+   char - 16 bits 
+   
+4. Boolean (true/false) : 
+   boolean 
+
+/*********
+Literals : 
+*********/
+
+integer literals -> 123 (int, short/byte must be within range), 0b1010 (binary starts with 0b), 123_456_789, 0b1101_0110 (underscores help readability), 0x7F (hexadecimal), 
+0x7FL (hexadecimal long, note that an int literal can always be assigned to a long, but long literals need the L suffix)
+
+floating point literals default to double -> 2.0 (standard), 6.022E23 (scientific) but a suffix f makes it a float -> 2.3f 
+
+boolean literals -> true, false
+
+character literals -> 'a' (note strings use "double quotes")
+
+
+/*****************
+Converting types :
+*****************/
+
+(target-type) value
+
+Narrowing conversions are not automatic, and cause modulo shrinking if required, like int to byte.
+Truncation occurs from float to int, e.g. 1.23 -> 1.
+
+Automatic type promotion make occur, e.g. multiplying bytes, even when overflow does not occur.
+
+Type promotion rules/order : byte/short/char become int, if one is long then all are long, if one is float than all are floar, if one is double than all are double 
+
+/*******
+Arrays :
+*******/
+
+int[] arr = new int[10];
+int[][] multiarr = new int[5][10];
+
+/*****
+Misc :
+*****/
+String is actually a special immutable class. Comparisons should be done as so : str1.equals(str2)
+Also note that Java has no pointers, rather references may refer to an object in memory, but the exact location in memory (virtual address) is abstracted by the JVM.
+
+

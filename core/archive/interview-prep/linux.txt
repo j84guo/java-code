@@ -1,0 +1,133 @@
+/***************
+
+user vs groups :
+->multiple users can work without affecting each others' data
+->groups organize collections of accounts, primarily as a security measure
+
+file permissions :
+-> read file/list directory 
+-> edit file/edit directory (add and delete files)
+-> execute script 
+
+directory structure : 
+-> / (root) holds files that are necessary for booting the system up 
+-> /usr contains all commands, libraries, manual pages, and other unchanging files needed during normal operation
+-> /var contains files that change, such as log files and temporary files
+-> /home contains the users' data
+-> /etc has various configurations
+-> /dev contains the special device files for hardware
+
+find and grep :
+-> grep is used to find strings in a file whereas find is used to find a file/directory in a directory 
+-> e.g. 
+-> find / -name case.sh 2> errors.out
+-> grep "shell" readme.txt
+-> grep -r "shell" 
+
+common commands : 
+-> chown root:root readme.txt #changes owner and group of file
+-> apt-get #advanced package tool 
+-> tar 
+-> date | sed 's/O/oooo/'
+-> date | sed '/Oct/s/Oct/gamma/'
+
+networking :
+-> ssh, scp and sftp use TCP 22
+-> smtp uses TCP 25
+-> http uses TCP 80
+-> https uses TCP 443
+-> RDP uses TCP 3389
+
+shell scripting :
+-> lynda course
+
+@DEFINITIONS
+-> process : a running program instance with its own address space and file descriptors (e.g. JVM) all processes except process 0 have a parent and can have multiple children		
+-> thread : a sequence of instructions to execute in the CPU, multiple threads may exist in a process
+-> daemon : a background program detached from the keyboard/display of any interactive user
+-> service : a program responding to requests over some inter-process communication mechanism (usually over a network), usually          implemented as a daemon
+-> job : a job is a concept used by the shell, any interactively started program (running in background/foreground) which doesn't detach (i.e. not daemon) and can be one or more processes!
+-> session : A collection of process groups established for job control purposes. Each process group is member of a session. A process is considered to be member of the session of which its process group is member. A newly created process joins the session of its creator.
+A session contains a number of process groups, and a process group contains a number of processes, and a process contains a number of threads, a process group leader often is the session leader as well.
+-> process group : A collection of processes that permits the signaling of related processes. Each process in the system is a member of a process group that is identified by a process group id (the process ID of its leader). A newly created process joins the process group of its creator.
+-> foreground job : process groups with control of the terminal
+-> background job : process groups without control of the terminal
+-> user space : where normal user processes run, the role of the kernel is to manage applications running in this space from messing with each other and the machine
+-> kernel space : location where the code of the kernel is stored, and executes under
+Processes running in user space don't have access to the kernel space. User space processes can only access a small part of the kernel via an interface exposed by the kernel - the system calls. If a process performs a system call, a software interrupt is sent to the kernel, which then dispatches the appropriate interrupt handler and continues its work after the handler has finished.
+-> signals : used for interprocess communication
+-> file descriptors : integer representations of file resources
+
+@MORE_COMMANDS
+-> ^C kills foregroung job 
+-> kill %1 kills a background job by job number 
+-> kill 1000 kills a specific job by PID
+-> top system monitor showing cpu usage, memory, processes 
+-> htop 
+-> mpstat cpu status
+-> free shows available memory 
+-> SIGCHLD when child changes state, sends this to kernel
+-> strace 
+-> trap traps singals and attaches a function to perform
+-> du
+-> disown
+-> who
+-> tty
+
+
+@LINKS
+https://www.lynda.com/Linux-tutorials/Linux-Shells-Processes/554398-2.html?srchtrk=index%3a3%0alinktypeid%3a2%0aq%3alinux+process%0apage%3a1%0as%3arelevance%0asa%3atrue%0aproducttypeid%3a2
+
+https://www.lynda.com/Linux-tutorials/Understanding-Linux-boot-process/573393/656870-4.html
+
+https://www.lynda.com/Linux-tutorials/LFCS-Operation-Running-Systems-Ubuntu/585261-2.html?srchtrk=index%3a5%0alinktypeid%3a2%0aq%3alinux+process%0apage%3a1%0as%3arelevance%0asa%3atrue%0aproducttypeid%3a2
+
+kernel basics : 
+boot process :
+keyboard to output process : 
+misc. concepts : 
+****************/
+
+UNIX and Linux Interview questions answers
+
+Here is my list of frequently asked UNIX and Linux interview questions and answers. All these questions are based upon fundamental commands and concepts which is must for working in any UNIX operating system e.g. Solaris.
+
+1) How to find all the links in a folder in UNIX or Linux ?
+This is a tricky UNIX question as there is no specific command to find all symbolic links. Though you have ln command for creating and updating soft links but nothing which gives you all the links in a directory. You need to use ls command which list everything in directory and then you need to list all the links, as they starts with "l" as first characters, as shown in above article .
+here is the actual UNIX command to find all links in a directory :
+linux@nyj872:~ ls -lrt
+total 2.0K
+-rw-r--r-- 1 Linux Domain Users 0 Dec 6 2011 a
+drwxr-xr-x+ 1 Linux Domain Users 0 Sep 19 12:30 java/
+lrwxrwxrwx 1 Linux Domain Users 4 Sep 19 12:31 version_1.0 -> java/
+linux@nyj872:~ ls -lrt | grep '^l'
+lrwxrwxrwx 1 Linux Domain Users 4 Sep 19 12:31 version_1.0 -> java/
+
+2) How to find a process and kill that ?
+Another classic UNIX interview questions. Answer of this question is simple if you are familiar with ps, grep and kill command. by using "ps -ef" you can get list of all process and then use grep to find your process and get the PID of that process. Once you got PID you can use kill command to kill that process as shown in this example of kill command in UNIX.
+
+3) How to run a program in background in UNIX or Linux ?
+an easy UNIX or Linux interview question, only when you know. You can use &amp; to run any process in background and than you can use jobs to find the job id for that process and can use fg and bg command to bring that process into foreground and background.
+
+4) How to sort output of a command in reverse order in Linux or UNIX ?
+One more Linux command interview question which checks knowledge of frequently used command. you can use sort command in UNIX to sort output of any command by using PIPE. By using -r option with sort command you can sort output of any command in reverse order.
+
+5) How to create archive file in UNIX or Linux Operating System ?
+Another interview question based on knowledge of UNIX or Linux command. you can use tar command to great archives in UNIX or Linux. you can even combine tar and gzip to create a compressed archive in UNIX.
+
+6) What is meaning of a file has 644 permission ?
+To answer this UNIX or Linux interview question, you must know basics of files and directories in UNIX. 644 represents permission 110 for owner, permission 100 for group and 100 for others which means read + write for owner who create that file and read only permission for group and others.
+
+7) How will you remove empty files or directories from /tmp ?
+See how to delete empty directory and files in UNIX to answer this UNIX command interview questions.
+
+8) I have read permission on a directory but I am not able to enter it why ?
+One more tricky UNIX questions. In order to get into a directory you need execute permission. if your directory does not have execute permission than you can not go into that directory by using cd command.
+
+9) How do you find all files which are modified 10 minutes before ?
+This is another the Linux interview questions from frequently used command e.g. find and grep. you can use -mtime option of find command to list all the files which are modified 10 or m minutes before.
+
+10) How to do you find size of directory in UNIX or Linux ?
+This is another tricky and bit tough Linux interview question as popular ls command doesn't show complete size of directories in UNIX. you need to use du command to get full size of directories including all sub directories in UNIX.
+
+These were some of the frequently asked UNIX and Linux command interview questions and answers which appear in many IT Job interview which requires knowledge of UNIX operating system, Including programming job interviews e.g. core Java and J2EE interviews. Questions from UNIX and Linux is also very popular during C and C++ programming interviews.

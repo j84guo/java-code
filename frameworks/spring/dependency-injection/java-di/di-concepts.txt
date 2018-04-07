@@ -1,0 +1,24 @@
+There are some problems with the legacy email application :
+
+1. EmailConsumer has a hardcoded dependency, it is responsible for initializing the EmailService and using it. Switching to a different email service in the
+   future would require changes in the EmailConsumer class. The difficulty extends in the case of multiple classes using the EmailService.
+2. Testing is difficult because the consumer directly creates the service, we can't mock the dependency.
+   
+The better way to implement dependency inject is : 
+
+1. Service components should be designed with a base class or an interface.
+2. Consumer classes should be written in terms of the service interface.
+3. Injector classes will initialize the services and consumers.
+
+Results : 
+
+1. Notice in the modern example that consumers are no longer responsible for instantiating their dependencies. Rather, an injector class
+   returns a created service. In our framework code therefore, we create an injector and call getConsumer(). This method creates a consumer and injects it with
+   a service object.This way we've decoupled the service initialization logic from the consumer and moved it to the injector, so changes can be made to the service
+   without re-writing the consumer. 
+
+2. Also, the MessageService interface in our consumer allows for easily swapping service implementations.
+
+Summary :
+One caveat is that injector classes mean a lot of boiler plate code. This is why Spring framework is used, it handles the task of implementing the injection
+logic, we just declare what is needed through xml/java configuration.

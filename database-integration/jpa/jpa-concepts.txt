@@ -1,0 +1,71 @@
+/*************************
+Object Relational Mapping:
+*************************/
+
+0. ORM :
+
+ORM is a programming technique which converts data between relational databases and object oriented programming languages, relieving the software engineer from
+having to code the tabular-to-object conversion.
+
+
+/*********************
+Java Persistence API :
+*********************/
+
+1. Introduction :
+
+Many legacy java applications use large amounts of code to access databases. This is often a result of having to use JDBC result sets to populate domain objects.
+JPA defines a specification for ORM. It specifies how to define a POJO entity and manage it. Third parties will implement JPA interfaces which can be used to move
+data between java objects and relational databases, e.g. Hibernate. Note that ORM implementation use JDBC under the hood!
+
+-allows application code to deal with objects as opposed to JDBC result sets
+-hides sql queries from developer
+-abstracts database resource handling
+-optimized for simple queries
+
+
+2. JPA Class Architecture :
+
+EntityManager - interface which manages persistence operations on objects, factory for Query
+EntityManagerFactory - factory for EntityManager
+Persistence - utility class with static methods to obtain EntityManagerFactory instance
+Entity - objects stored as records (table rows) in the database
+EntityTransaction - maintains manager transacations, one to one relation with EntityManager
+Query - interface implemented by vendors to obtain objects matching criteria
+
+
+3. ORM Components :
+
+Most ORM implementations have the components below.
+-API for performing CRUD operations on persistent objects
+-API for querying based on class type and properties
+-configurable mapping metadata
+-interaction with transaction objects to perform optimization like lazy loading, dirty checking, association fetching, etc.
+
+
+4. Hibernate ORM Implementation :
+
+Hibernate is a popular ORM implentation which maps objects to rows in your database, it supports MySQL, Oracle, PostgreSQL, etc. Configuration data (e.g. XML)
+tells Hibernate how to communicate with your database, java annotations define the object to table relationships.
+
+Configuration object - represents a configuration file used by Hibernate
+SessionFactory object - created by Configuration, configures hibernate for the application and allows a session object to be initialized
+Session object - provides connection to database, created/destroyed each time operations need to be done, persistent objects are handled through a Session object
+Transasction object - optional object representing a unit of work for the database
+Query object - represents a SQL query (HQL maps to specific SQL)
+Criteria object - criteria for a Query
+
+4.1 Configuration : Configuration for the specific database used.
+hibernate.dialect - tells hibernate the database SQL dialect to use
+hibernate.connection.driver_class - JDBC driver used to communicate with the database
+hibernate.connection.url - url to database instance
+hibernate.connection.username - db username
+hibernate.connection.password - db password
+hibernate.connection.pool_size - hibernate connection pool
+
+4.2 Session : Lightweight connection to database
+Entity POJO's can be persistent (saved) or transient (not saved).  Provides methods such as get(), delete(), update
+
+4.3 Mapping file : XML which defines object to table relationship (field to column, id, class name to table name) generally named as .hbm.xml.
+
+4.4 Annotations : A less verbose alternative to xml mapping is to use Java annotations, see examples.

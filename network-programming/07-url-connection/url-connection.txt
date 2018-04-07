@@ -1,0 +1,28 @@
+/*************
+URLConnection:
+**************/
+
+Abstract class which represents an active (TCP) connection to a url.
+1. It provides control over a connection with an http host (as opposed to URL)
+   -> provides the full set of HTTP verbs and header control
+2. Part of Java's protocol handler mechanism, which includes URLStreamHandler
+
+Opening URLConnection
+1. Construct a URL object.
+2. Invoke the URL object’s openConnection() method to retrieve a URLConnection
+   object for that URL.
+3. Configure the URLConnection.
+4. Read the header fields.
+5. Get an input stream and read data.
+6. Get an output stream and write data.
+7. Close the connection.
+
+Reading Server Data
+1. Construct a URL object.
+2. Invoke the URL object’s openConnection() method to retrieve a URLConnection
+   object for that URL.
+3. Invoke the URLConnection ’s getInputStream() method.
+4. Read from the input stream using the usual stream API.
+
+Like url.openStream() which returns an InputStream (concrete implementation hidden in the sun packages which power the standard java api under the covers),
+url.openConnection() returns a URLConnection (concrete implementation in those sun packages) and url.getInputStream() returns a concrete input stream too

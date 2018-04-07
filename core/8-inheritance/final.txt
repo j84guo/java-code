@@ -1,0 +1,3 @@
+final classes cannot be extended
+final methods cannot be overriden
+final fields are constants initialized once 

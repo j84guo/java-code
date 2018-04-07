@@ -1,0 +1,7 @@
+Composite builds allow you to test libraries without re-publishing them after each change. This is useful in highly modular projects, like microservices.
+use 
+
+./gradlew build --include <path to build>
+
+Gradle will fetch the jar's located at the specified path. If any dependencies in the composite project can be satisfied by the include build, gradle will 
+substitute the local libraries. 

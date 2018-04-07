@@ -1,0 +1,114 @@
+/***********
+xml basics :
+************/
+
+Since xml formats are user defined, there may be conflicts in element names. Therefore elements can be prefixed to precent ambiguity. E.g. <h:table> vs <f:table>. Prefixes could also clash of course,
+so they are associated with a unique namespace, usually a URL. E.g. xmlns:h="http://www.w3.org/TR/html4/", note that the processor does not visit this url, the point is to establish uniqueness. 
+A way to avoid prefixes is to establish a default namespace using xmlns="<url>" as an attribute in the root element.
+
+xsd is a w3c recommendation to formalize the description of xml semantics. Is is itself valid xml!
+
+Often xmlns:sxi="<url>" declares a namespace for the xsi prefix. xsi usually points to an xsd definition.
+
+
+/******************************
+Spring Configuration Techniques
+*******************************/
+
+The Spring container (BeanFactory or more commonly ApplicationContext) is reponsible for creating beans and injecting them into other objects (wiring). The
+wiring specification can be declared in three main ways : explicit xml, explicit java and automatic configuration (implicit bean discovery and automatic
+injection).
+
+/*******************************************************************
+1. Explicit XML configuration
+********************************************************************/
+
+Configuration XML file :
+-> some namespace definitions
+-> rooted with @Bean 
+
+Bean declaration :
+-> use the <bean /> element like so,  <bean id="beanName" class="package.class" />
+-> spring will detect the element and create the bean by calling its default constructor
+
+Constructor Injection :
+-> use the <constructor-arg> element or the c namespace, spring will inject a reference to the bean with the specified id 
+<bean id="cdPlayer" class="package.CDPlayer">
+	<constructor-arg ref="compactDisc"/>
+</bean>
+
+-> note that you need to declare the c namespace to use it
+<bean id="cdPlayer" class="package.CDPlayer" c:cd-ref="compactDisc"/>
+
+
+/*******************************************************************
+2. Explicit Java configuration
+********************************************************************/
+
+Configuration class :
+
+-> For expligiy Java configuration, a configuration class should be created using @Configuration annotation. Whereas in automatic configuration used @ComponentScan to
+find and create beans, Java configuration uses methods annotated with @Bean.These methods are invoked by Spring to create beans (singleton by default). 
+->Note that if the scope of a bean is singleton, Spring intercepts subsequent calls to the @Bean method and returns the first object.
+
+Declaring a bean :
+-> The configuration class should import the appropriate classes
+-> Then, use an @Bean annoted method which returns new MyType()
+
+Wiring beans :
+-> in the @Bean method for a bean which has other bean dependencies, you can either invoke the dependency's @Bean method (required methods to be in same class in this 
+case) or include the desired dependency type in the method parameters, Spring will wire the requested type.
+
+Note that @Autowired is not unique to automatic configuration. It is used in any bean to declare a dependency, regardless of the configuration method.
+
+
+/*******************************************************************
+3. Implicit bean discovery and autowiring (Automatic configuration)  
+********************************************************************/
+
+Autowiring is achieved in two phases :
+
+Component scanning 
+---> Spring discovers user defined beans to be created in the application context (note that external beans still need to be explicitly imported and declared in java config)
+Autowiring 
+---> Spring automatically injects dependencies
+
+Creating discoverable beans :
+-> Turn on component scanning EXPLICITLY in one of the following ways 
+	-Use a Java config class annotated with @Configuration and @ComponentScan (by default scans the same package as the config class)
+	-Use an XML config file with the tag <context:component-scan base-package="myPackage"/>
+-> Use @Component on the bean's class 
+
+Injecting beans :
+-> annotate a field or method with @Autowired
+
+Annotation Details :
+-> All beans in the application context have a default ID, which can be overridden using @Component("myCustomBeanName") or a normal @Component and 
+   @Named("myCustomByName").
+
+-> @ComponentScan defaults to the current package when scanning. To explicitly set one or more packages, use @ComponentScan("pacakge1") or 
+   @ComponentScan(basePackages={"package1", "package2", "package3"}) or @ComponentScan(basePackageClasses={classInP1.class, classInp2.class})
+   Note the last convention is type safe, i.e. safe after refactoring the package names.
+
+-> @Autowired indicates that Spring chould satisfy an object's dependency through a field or method. Using @Autowired(required=false) tells spring not to
+   throw an exception if it can't find the right bean, which it normally does. Note that @Inject (Java DI Specification) can also be used.  
+
+-> @ContextConfiguration(classes=ConfigClass.class) is used in test classes to identify config class to start bean wiring.
+
+Loading Application Context :
+Traditionally, Spring uses an ApplicationContext object in the main method to load the application context.
+E.g. ApplicationContext context = new ClassPathXMLApplicationContext("path");
+     SomeObject obj = (SomeObject) context.getBean("beanName"); // alternatively use the java application context and pass the configuration classes
+
+
+/******************************
+Mixing Configuration Techniques
+*******************************/
+
+-> Import java/xml configuration into java configuration class 
+@Import(SomeClass.class)
+@ImportResource("classpath:file.xml")
+
+-> Reference java/xml configuration from xml file
+<import resource="file.xml" />
+<bean class="package.ConfigurationClass">

@@ -1,0 +1,72 @@
+// there is a buildscript method defined somewhere
+// it takes in a closure as a single parameter, we are calling it and passing the closure
+// something like def buildscript(Closure closure)
+buildscript {
+	repositories {
+		jcenter()
+	}
+	dependencies {
+		classpath 'com.android.tools.build:gradle:1.2.3'
+	}
+}
+
+// similarly, there is an allprojects method somewhere which accepts a closure, we are caling it and passing the closure
+// def allprojects(Closure closure)
+allprojects {
+	repositories {
+		jcenter()
+	}
+}
+
+/***
+
+But where are these methods defined? 
+All top level statements in a build script are delegated to a Project instance.
+
+Any script block is a method call which takes a closure as a parameter.
+Our buildscript method delegates the closure it receives to ScriptHandler, so our passed closure executes repositories(Closure) and dependencies (Closure), methods from ScriptHandler class.
+
+Project has pre-defined script blocks. But plugins can add new script blocks.
+
+***/
+
+task hello1 {
+	println "in configuration phase for hello1..."
+}
+
+task hello2 {
+	doLast {
+		println "performing doLast task action!"
+	}
+}
+
+task hello3 {
+	println "in configuration phase for hello3..."
+	doLast {
+		println "now performing action"
+	}
+}
+
+task hello4 << {
+	println "using old << operator to append action"
+}
+
+def myClosure = {String str -> println str}
+def myClosure2 = {println it}
+def myClosure3 = {str, num -> println "$str : $num"}
+
+def myVar = 'This is a class varliable'
+def myClosure4 = {println myVar}
+
+class MyClass {
+	def myClassVar = 'Hello this is a variable from MyClass, an object of MyClass() was passed to myClosure5()'
+}
+def myClosure5 = {println myClassVar}
+MyClass m = new MyClass()
+myClosure5.setDelegate(m) //setDelegate modifies the scope of execution to that of another class
+
+myClosure('Passed in a parameter to my closure')
+myClosure2('Single parameter can be referenced as it in a closure!')
+myClosure3('Data types are optional for closure parameters', 314)
+myClosure4()
+myClosure5()

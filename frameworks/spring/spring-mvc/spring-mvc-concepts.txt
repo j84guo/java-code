@@ -1,0 +1,45 @@
+/***********
+Spring MVC :
+***********/
+
+All requests are mapped to Spring's DispatcherServlet. This can be achieved by configuring the servlet container application's web.xml file. This is also known as the fron controller 
+pattern. The DispatcherServlet passes the request to a Spring MVC controller after consulting the handler mappings. The controller uses asks a model to performs some logic and returns
+the model's data and a view name back to the DispatcherServlet. The DispatcherServlet consults a view resolver to map the logical view name to a view and fill in the model data. Finally,
+the DispatcherServlet sends the view back to the client.
+
+Note that a recent trend in web applications is to move the controller to the front-end using som Javascript framework like React or Angular. The backend is really just a service layer
+which provides json data, completely decoupled from the view rendering. So the initial page is delivered by the server to boostrap this single page application, then from that point on
+the HTTP requests are made by asynchronous javascript calls. This pattern will be explored in another project.     
+
+
+DispatcherServlet vs ContextLoaderListener :
+
+When DispatcherServlet starts up, it creates a spring application context and starts loading it with beans declared in configuration classes and files. 
+With getServletConfigClasses(), we've asked the DispatcherServlet to load its application context with beans defined in the WebConfig configuration class.
+These beans like controllers, view resolvers and handler mappings. In parallel, the ContextLoaderListener is A SECOND application context which holds 
+beans from the data tier, the models, as well as miscellaneous others. ContextLoaderListener is configured using the classes from getRootConfigClasses(),
+in this case RootConfig.class.  
+
+
+/*************************
+Spring MVC Bootstrapping :
+*************************/
+
+1. java based bootstrap
+
+-web application .war is deployed in servlet container
+-servlet container searches for classes which implement the standard ServletContainerInitializer (using java's ServiceLoader)
+-spring's initializer class is found and instantiated 
+-the spring intializer class searches classpath for WebApplicationInitializer implementations (e.g. AbstractAnnotationConfigDispatcherServletInitializer)
+-your web application initializer class is found and instantiated by spring's initializer 
+-configuration files/classes are processed
+-DispatcherServlet is instantiated
+
+
+2. web.xml based boostrap
+
+-web application .war is deployed in servlet container
+-servlet container reads web.xml
+-if <listener> defines spring's ContextLoaderListener, it is instantiated by the servlet container 
+-ContextLoaderListener processes root application context 
+-DispatcherServlet is intantiated by servlet container and creates its own application context  

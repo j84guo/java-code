@@ -1,0 +1,43 @@
+/********************
+Java's OOP paradigm :
+********************/
+
+Computer programs consist of, and can be conceptually organized around code or data. That is to say, some programs describe "what is happening" while others describe "who is affected".
+
+Procedural languages -> like C describe the sequence of operations which take place (code acting on data). Difficulty of comprehending the program as a totality occurs however, as the 
+program's size increases. 
+
+Object oriented languages -> like Java and C++ organize the program around data, with a set of well defined interfaces to the data (data controlling access to code).
+
+The main benefit of object oriented programming is absraction. Complexity is managed by humans through abstraction. For example, hierarchical classification allows us to understand complex concepts. In a program,
+a large collection of data can be treated as an object, and a series of operations related to the data can be represented with a method. Abstraction also allows software to evolve 
+gracefully, by swapping components but maintaining a clean interface.
+
+The main OOP principles can be stated as follows :
+
+1. Encapsulation : binds code and data together, separating it from misuse/interference by the outside world. encapsulated code/data is exposed via a well defined interface (the class), 
+   allowing users to perform operations or access data without worrying about the implementation details. In Java, the class is a logical construct defining the structure of data and its 
+   behaviour. An instance of the class is an object, which has physical reality (in memory). Classes have member variables/methods with different levels. 
+
+2. Inheritance : objects may inherit characteristics from ancestors, allowing for hierarchical relationships. Thus a class only needs to include what makes it unique among siblings and the
+   ancestors. 
+
+3. Polymorphism : allows one interface to have many implementations. Thus an interface can describe a general type of object/operation.
+
+/***************
+Java Semantics : 
+***************/
+
+-source files may have a maximum of one public class  of the same name (capitalized)
+-in an application, one public class has a main method which serves as the entry point
+-variables are declared as <type> <var-name>, initialized as <var-name>=<value>
+-control statements direct the flow of execution, e.g. if(){} for(){}
+-blocks of statements are delimited with curly braces {}
+-lexical units : whitespace, indentifiers, literals, comments, separators, keywords.
+
+/*********************
+Java Class Libraries :
+*********************/
+
+Packages of useful classes for handling netowork I/O, data structures, etc.
+

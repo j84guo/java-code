@@ -1,0 +1,19 @@
+By default, java does not cache anything. To install a system wide cache for a URL, you need concrete implementations of
+
+1. ResponseCache
+2. CacheRequest
+3. CacheResponse
+
+You install your subclass of ResponseCache that works with your subclass of CacheRequest and CacheResponse by passing it to the static method ResponseCache.setDefault().
+
+Once a cache is installed whenever the system tries to load a new URL, it will first look for it in the cache. If the cache returns the desired content, the URLConnection won’t
+need to connect to the remote server. However, if the requested data is not in the cache, the protocol handler will download it. After it’s done so, it will put its response into the
+cache so the content is more quickly available the next time that URL is loaded.
+
+Two abstract methods in the ResponseCache class store and retrieve data from the system’s single cache:
+
+// gets cache data
+public abstract CacheResponse get(URI uri, String requestMethod, Map<String, List<String>> requestHeaders) throws IOException
+
+// returns stream to write to cache 
+public abstract CacheRequest put(URI uri, URLConnection connection) throws IOException

@@ -1,0 +1,62 @@
+def closure1 = {println "Hello from a closure! Closures are similar to lambdas in Java 8"}
+closure1()
+
+def closure2 = {println it}
+closure2("Single parameters can be referenced using it")
+
+def closure3 = {String s, String u -> println "$s : $u"}
+closure3("first parameter", "second parameter (note that parameter types are optional)")
+
+println "By default, closures execute within the enclosing class' context. However, that context can be changed by using setDelegate(object) and passing in an instance of another class"
+def closure4 = {println classVar}
+MyClass m = new MyClass()
+closure4.setDelegate(m)
+closure4()
+
+/*
+
+The benefit of closures is being able to pass execution logic to methods.
+
+myMethod (myClosure)
+myMethod myClosure
+myMethod {println "Hello World"}
+myMethod (arg, myClosure)
+myMethod (arg, {println "Hello World"})
+myMethod (arg) {println "Hello World"}
+
+*/
+
+class MyClass {
+	def classVar = "This is a variable defined in a class"
+}
+
+// in out build script, we can see there's somewhere a method builscript which accepts a closure
+// i.e. def buildscscript (Closure c)
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:1.2.3'
+    }
+}
+
+// likewise, there is somewhere a method allprojects which accepts a closure 
+// i.e. def allprojects(Closure c)
+allprojects {
+    repositories {
+        jcenter()
+    }
+}
+
+/*
+
+Project - this is a key concept in Gradle
+
+All top level statements in a script are delegated to a Project instance
+A so called script block is just a method call which takes a closure as parameter
+Executing a closure against another class means delegating it to an instance of that class
+
+Gradle plugins are allowed to add new script blocks to Project, i.e. add new methods
+
+*/

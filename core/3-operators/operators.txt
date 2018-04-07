@@ -1,0 +1,20 @@
+Common operators ommitted.
+
+/********
+Bitwise :
+********/
+
+Operate on bits of int, long, byte or short.
+
+~ bitwise unary not
+& bitwise AND
+| bitwise OR
+^ bitwise XOR
+>> right shift (preserves higher order bit!)
+<< left shift (brings zero)
+>>> unsigned shift (brings zero)
+
+/********
+Ternary :
+********/
+e1 ? e2 : e3;
