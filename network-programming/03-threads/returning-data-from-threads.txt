@@ -6,10 +6,9 @@ must try to finish calculations before its field is accessed, possible leading t
 
 Solutions :
 
-One naive solution is to implement POLLING, whereby the getter is repeatedly polled for data by the accessor class. However this is inefficient and may take compute time away from the 
-worker threads! 
+One naive solution is to implement POLLING, whereby the getter is repeatedly polled for data by the accessor class. However this is inefficient and may take compute time away from the
+worker threads!
 
-The more effective solution is to use CALLBACKS whereby the boss thread'c class has some (static or non static) callbacl methods which the worker invokes upon completion. If multiple 
+The more effective solution is to use CALLBACKS whereby the boss thread's class has some (static or non static) callbacl methods which the worker invokes upon completion. If multiple 
 objects are interested in the worker's data, they can register themselves in a linked list by calling a method in the worker. Then the worker invokes callbacks for each interested object,
 possible using an interface that the interested objects implement. This is aka the "observer" pattern.
-
