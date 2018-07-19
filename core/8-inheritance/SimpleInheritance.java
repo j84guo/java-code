@@ -1,3 +1,10 @@
+/*
+* In java, the base class' accessible no-args constructor is called
+* automatically by a derived class constructor. If the base class has no such
+* constructor (not accessible or not no-args) then the first method call must be
+* to invoke a specific base constructor using super(args...)
+*/
+
 // A simple example of inheritance.
 // Create a superclass.
 class A {
@@ -21,14 +28,14 @@ class SimpleInheritance {
 	public static void main(String args []) {
 		A superOb = new A();
 		B subOb = new B();
-		
+
 		// The superclass may be used by itself.
 		superOb.i = 10;
 		superOb.j = 20;
 		System.out.println("Contents of superOb: ");
 		superOb.showij();
 		System.out.println();
-		
+
 		/* The subclass has access to all public members of
 		its superclass. */
 		subOb.i = 7;
