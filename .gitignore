@@ -3,3 +3,4 @@ build/
 frameworks/**/*.lock
 projects/
 *.class
+*.jar
